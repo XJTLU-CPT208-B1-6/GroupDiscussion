@@ -261,6 +261,129 @@
                 font-size: 1.6rem;
             }
         }
+        /* Persona卡片样式 */
+        .persona-scroll-container {
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #ddd #f5f5f5;
+        }
+        .persona-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .persona-scroll-container::-webkit-scrollbar-thumb {
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+        .persona-scroll-container::-webkit-scrollbar-thumb:hover {
+            background-color: #ccc;
+        }
+        .persona-scroll {
+            display: flex;
+            gap: 25px;
+        }
+        /* Persona卡片链接容器 */
+        .persona-card-link {
+            text-decoration: none;
+            flex: 0 0 300px;
+            display: block;
+        }
+        .persona-card {
+            width: 100%;
+            padding: 30px 25px;
+            border: 1px solid #f5f5f5;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .persona-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #8c2db9 0%, #a84ed1 100%);
+        }
+        .persona-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+        }
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .persona-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8c2db9 0%, #a84ed1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.6rem;
+            box-shadow: 0 4px 12px rgba(140, 45, 185, 0.2);
+            flex-shrink: 0;
+        }
+        .persona-name {
+            flex: 1;
+        }
+        .persona-name h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 5px;
+        }
+        .persona-name .tagline {
+            font-size: 0.95rem;
+            color: #8c2db9;
+            font-weight: 500;
+        }
+        .persona-details {
+            flex: 1;
+        }
+        .persona-details .detail-item {
+            margin-bottom: 15px;
+        }
+        .persona-details .detail-label {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 500;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .persona-details .detail-value {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .persona-card-link {
+                flex: 0 0 260px;
+            }
+            .persona-card {
+                padding: 25px 20px;
+            }
+            .persona-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 1.4rem;
+            }
+            .persona-name h3 {
+                font-size: 1.25rem;
+            }
+        }
         @media (max-width: 480px) {
             nav {
                 text-align: center;
@@ -283,6 +406,7 @@
     <nav>
         <a href="#home">Home</a>
         <a href="#team">Team</a>
+        <a href="#persona">Persona</a>
         <a href="#log">Log</a>
     </nav>
 
@@ -348,9 +472,100 @@
         </div>
     </section>
 
+    <!-- Persona人物画像模块 -->
+    <section id="persona">
+        <h2>Persona</h2>
+        <div class="persona-scroll-container">
+            <div class="persona-scroll">
+                <!-- Persona 1: Lin Ze -->
+                <a href="persona1.html" class="persona-card-link">
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">LZ</div>
+                            <div class="persona-name">
+                                <h3>Lin Ze</h3>
+                                <div class="tagline">Outgoing Student </div>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Role</div>
+                                <div class="detail-value">Topic initiator, idea organizer and progress driver</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Needs</div>
+                                <div class="detail-value">Active responses from members, tasks completed on time</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Challenges</div>
+                                <div class="detail-value">Dealing with passive cooperation without damaging relationships</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- Persona 2: Su Xiao -->
+                <a href="persona2.html" class="persona-card-link">
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">SX</div>
+                            <div class="persona-name">
+                                <h3>Su Xiao</h3>
+                                <div class="tagline">Introverted Student</div>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Role</div>
+                                <div class="detail-value">Passive participant and quiet thinker</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Needs</div>
+                                <div class="detail-value">Relaxed environment, ideas to be valued</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Challenges</div>
+                                <div class="detail-value">Fear of public speaking, feels overlooked</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- Persona 3: Chen Wei -->
+                <a href="persona3.html" class="persona-card-link">
+                    <div class="persona-card">
+                        <div class="persona-header">
+                            <div class="persona-avatar">CW</div>
+                            <div class="persona-name">
+                                <h3>Chen Wei</h3>
+                                <div class="tagline">Instructor</div>
+                            </div>
+                        </div>
+                        <div class="persona-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Role</div>
+                                <div class="detail-value">Activity initiator and formal supervisor</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Needs</div>
+                                <div class="detail-value">Truly engage students, spark ideological collisions</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Challenges</div>
+                                <div class="detail-value">Lacks effective intervention and guidance methods</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- 项目日志板块 -->
     <section id="log">
         <h2>Project Log</h2>
+        <div class="log-item">
+            <div class="log-date">2026-03-29</div>
+            <div class="log-content">Designed the first draft of the poster and completed the overall framework.</div>
+        </div>
         <div class="log-item">
             <div class="log-date">2026-03-18</div>
             <div class="log-content">Completed the project homepage with team member information and deployed to GitHub Pages.</div>
