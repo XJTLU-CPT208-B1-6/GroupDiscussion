@@ -3,303 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lin Ze | XJTLU Group Discussions</title>
+    <title>Cristina - Persona</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        html {
-            scroll-behavior: smooth;
-        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.7;
-            color: #333;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 20px;
+            color: #333;
         }
-        nav {
-            text-align: right;
-            padding: 20px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 40px;
-        }
-        nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #8c2db9;
-            font-size: 1.3rem;
-            font-weight: 600;
-            position: relative;
-        }
-        nav a::after {
-            content: "";
-            position: absolute;
-            bottom: -3px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: #8c2db9;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        nav a:hover::after {
-            width: 80%;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #222;
-            letter-spacing: -0.8px;
-            position: relative;
-            display: inline-block;
-        }
-        h1::after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: #8c2db9;
-            border-radius: 3px;
-        }
-        .subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 40px;
-            font-weight: 400;
-            line-height: 1.5;
-        }
-        section {
-            margin-bottom: 50px;
-        }
-        h2 {
-            font-size: 1.4rem;
-            color: #222;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-            font-weight: 600;
-            position: relative;
-        }
-        h2::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 30px;
-            height: 2px;
-            background-color: #8c2db9;
-        }
-        p {
-            margin-bottom: 15px;
-            font-size: 1.05rem;
-            color: #555;
-            line-height: 1.8;
-        }
-        .persona-profile-card {
-            max-width: 750px;
-            margin: 0 auto;
-            padding: 40px;
-            border: 1px solid #f5f5f5;
-            border-radius: 16px;
-            background-color: white;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.03);
-            position: relative;
-            overflow: hidden;
-        }
-        .persona-profile-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #8c2db9 0%, #a84ed1 100%);
-        }
-        .persona-profile-header {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .persona-profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #8c2db9 0%, #a84ed1 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
-            font-size: 2.5rem;
-            box-shadow: 0 6px 18px rgba(140, 45, 185, 0.2);
-            flex-shrink: 0;
-        }
-        .persona-profile-name {
-            flex: 1;
-        }
-        .persona-profile-name h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 8px;
-        }
-        .persona-profile-name .tagline {
-            font-size: 1.1rem;
-            color: #8c2db9;
-            font-weight: 500;
-        }
-        .persona-detail-section {
+            color: #764ba2;
             margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-align: center;
         }
-        .persona-detail-section:last-child {
-            margin-bottom: 0;
+        .persona-section {
+            margin-bottom: 25px;
         }
-        .persona-detail-label {
-            font-size: 0.95rem;
-            color: #999;
-            font-weight: 600;
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #667eea;
             margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
-        .persona-detail-content {
-            font-size: 1.05rem;
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
             color: #555;
-            line-height: 1.8;
         }
         .back-link {
             display: inline-block;
             margin-top: 30px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-decoration: none;
-            color: #8c2db9;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 1.1rem;
+            transition: all 0.3s ease;
         }
         .back-link:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 30px 0 20px;
-            border-top: 1px solid #f0f0f0;
-            font-size: 0.95rem;
-            color: #777;
-            margin-top: 80px;
-            position: relative;
-        }
-        footer::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 1px;
-            background-color: #8c2db9;
-            opacity: 0.5;
-        }
-        @media (max-width: 768px) {
-            body {
-                padding: 0 15px;
-            }
-            h1 {
-                font-size: 2.2rem;
-            }
-            nav a {
-                font-size: 1.1rem;
-                margin-left: 10px;
-            }
-            .persona-profile-card {
-                padding: 30px 25px;
-            }
-            .persona-profile-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .persona-profile-avatar {
-                width: 80px;
-                height: 80px;
-                font-size: 2rem;
-            }
-            .persona-profile-name h3 {
-                font-size: 1.7rem;
-            }
-        }
-        @media (max-width: 480px) {
-            nav {
-                text-align: center;
-                padding: 15px 0;
-            }
-            nav a {
-                margin: 0 8px;
-            }
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html#home">Home</a>
-        <a href="index.html#team">Team</a>
-        <a href="index.html#persona">Persona</a>
-        <a href="index.html#log">Log</a>
-    </nav>
-
-    <header>
-        <h1>Persona Profile</h1>
-        <div class="subtitle">CPT208 Course Group Project | Xi'an Jiaotong-Liverpool University</div>
-    </header>
-
-    <section>
-        <div class="persona-profile-card">
-            <div class="persona-profile-header">
-                <div class="persona-profile-avatar">LZ</div>
-                <div class="persona-profile-name">
-                    <h3>Lin Ze</h3>
-                    <div class="tagline">Outgoing Student (Group Leader)</div>
-                </div>
-            </div>
-            <div class="persona-detail-section">
-                <div class="persona-detail-label">Basic Info</div>
-                <div class="persona-detail-content">
-                    A sophomore majoring in Human-Computer Interaction Design. He is enthusiastic, outgoing, quick-witted and articulate with strong planning skills, and is appointed as the group discussion leader by the teacher.
-                </div>
-            </div>
-            <div class="persona-detail-section">
-                <div class="persona-detail-label">Behavioral Traits</div>
-                <div class="persona-detail-content">
-                    He takes the initiative to open topics and assign discussion tasks in group discussions, can quickly sort out everyone's ideas to form a preliminary framework, and is highly action-oriented. He expects to advance the discussion efficiently and achieve set goals. However, he lacks careful observation of team members' emotions. When facing non-cooperative group members, he will directly express his anxiety and even urge them repeatedly, which creates a tense communication atmosphere and hinders the discussion progress instead.
-                </div>
-            </div>
-            <div class="persona-detail-section">
-                <div class="persona-detail-label">Pain Points & Needs</div>
-                <div class="persona-detail-content">
-                    He is eager for active responses from group members and hopes everyone can finish assigned tasks on time. He has no idea how to deal with others' passive cooperation—he does not want to blame others harshly and damage peer relationships, nor is he willing to let the discussion fall behind schedule.
-                </div>
-            </div>
-            <div class="persona-detail-section">
-                <div class="persona-detail-label">Role in Group Discussion</div>
-                <div class="persona-detail-content">
-                    Topic initiator, idea organizer and progress driver, but with a clear weakness in team coordination and conflict resolution.
-                </div>
-            </div>
-            <a href="index.html#persona" class="back-link">← Back to Persona Page</a>
+    <div class="container">
+        <h1>Cristina</h1>
+        
+        <div class="persona-section">
+            <div class="section-title">Profile</div>
+            <div class="section-content">21-year-old undergraduate in Computer Science; English-proficient, frequent user of academic collaboration tools.</div>
         </div>
-    </section>
-
-    <footer>
-        &copy; 2026 XJTLU CPT208 Group B1_6. All Rights Reserved.
-    </footer>
+        
+        <div class="persona-section">
+            <div class="section-title">Goals</div>
+            <div class="section-content">Organize discussion threads clearly, manage learning materials, and communicate smoothly in team projects.</div>
+        </div>
+        
+        <div class="persona-section">
+            <div class="section-title">Pain Points</div>
+            <div class="section-content">Disorganized conversation flow, scattered information, hard to find key content, complex tools with steep learning curves.</div>
+        </div>
+        
+        <div class="persona-section">
+            <div class="section-title">Needs</div>
+            <div class="section-content">Clean thread structure, quick search, simple UI, real-time sync, academic resource sharing.</div>
+        </div>
+        
+        <div class="persona-section">
+            <div class="section-title">Behaviors</div>
+            <div class="section-content">Daily use for group work, note-taking during discussions, frequent review of past content.</div>
+        </div>
+        
+        <a href="index.html#persona" class="back-link">Back to Personas</a>
+    </div>
 </body>
 </html>
