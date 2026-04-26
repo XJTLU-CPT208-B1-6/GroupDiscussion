@@ -17,42 +17,75 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.7;
             color: #333;
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0;
             background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
             min-height: 100vh;
         }
-        /* 顶部导航栏（加粗+放大+动效） */
-        nav {
-            text-align: right;
-            padding: 20px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 40px;
+        /* 右侧悬浮侧边导航 */
+        .sidebar-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
-        nav a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #8c2db9;
-            font-size: 1.3rem;
-            font-weight: 600;
+        .sidebar-nav .nav-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin: 16px 0;
+            cursor: pointer;
+        }
+        .sidebar-nav .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(140, 45, 185, 0.3);
+            transition: all 0.3s ease;
             position: relative;
         }
-        nav a::after {
-            content: "";
+        .sidebar-nav .nav-label {
             position: absolute;
-            bottom: -3px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: #8c2db9;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #5a2c7a;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
-            transform: translateX(-50%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(140, 45, 185, 0.15);
         }
-        nav a:hover::after {
-            width: 80%;
+        .sidebar-nav:hover .nav-label {
+            opacity: 1;
+            visibility: visible;
+        }
+        .sidebar-nav .nav-dot.active {
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            box-shadow: 0 0 12px rgba(140, 45, 185, 0.4);
+        }
+        .sidebar-nav .nav-item.active .nav-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #8c2db9;
         }
         /* 标题区域 */
+        header {
+            padding: 0 20px;
+        }
         h1 {
             font-size: 2.8rem;
             font-weight: 700;
@@ -82,6 +115,7 @@
         /* 板块通用样式 */
         section {
             margin-bottom: 60px;
+            padding: 0 20px;
         }
         h2 {
             font-size: 1.6rem;
@@ -189,44 +223,6 @@
             color: #666;
             line-height: 1.5;
             font-weight: 500;
-        }
-        /* 日志板块 */
-        .log-item {
-            padding: 20px 15px;
-            border-bottom: 1px solid #f0f0f0;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            background-color: white;
-            transition: transform 0.2s ease;
-        }
-        .log-item:hover {
-            transform: translateX(5px);
-        }
-        .log-date {
-            font-size: 1rem;
-            color: #8c2db9;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        .log-content {
-            font-size: 1rem;
-            color: #333;
-            line-height: 1.6;
-        }
-        .log-topic {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        .log-list {
-            margin-left: 20px;
-            margin-bottom: 0;
-        }
-        .log-list-item {
-            margin-bottom: 5px;
-            line-height: 1.5;
         }
         /* 页脚 */
         footer {
@@ -399,16 +395,1101 @@
                 font-size: 1.25rem;
             }
         }
-        @media (max-width: 480px) {
+        /* Additional Section Styles */
+        h3 {
+            font-size: 1.3rem;
+            color: #444;
+            margin: 1.5rem 0 1rem;
+        }
+
+        /* Problems Grid */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .problem-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid #e74c3c;
+        }
+        .problem-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .problem-card h4 {
+            color: #333;
+            margin-bottom: 0.8rem;
+        }
+        .problem-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Aims Grid */
+        .aims-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .aim-item {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-left: 4px solid #8c2db9;
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+        .aim-emoji {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        .aim-item p {
+            margin: 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Findings Container */
+        .findings-container {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .finding-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+        .finding-num {
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .finding-item p {
+            margin: 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Requirements List */
+        .requirements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .req-item {
+            background: linear-gradient(135deg, #f0f9ff, #ffffff);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-left: 4px solid #2ecc71;
+            color: #444;
+            font-weight: 500;
+        }
+
+        /* Evaluation Methods */
+        .evaluation-methods {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .method-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .method-card h4 {
+            color: #8c2db9;
+            margin-bottom: 1rem;
+        }
+        .score-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+        .score-desc {
+            color: #555;
+            font-size: 0.95rem;
+        }
+        .heuristic-list {
+            margin-left: 1.5rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        .heuristic-list li {
+            margin-bottom: 0.5rem;
+        }
+        .ab-test {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .ab-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .ab-label {
+            font-weight: 700;
+            color: #8c2db9;
+            margin-bottom: 0.5rem;
+        }
+        .ab-item p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .result-badge {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Survey Stats */
+        .survey-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .stat-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 4px solid #8c2db9;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        .stat-item p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Pain Points */
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .pain-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .pain-item.high {
+            border-top: 4px solid #e74c3c;
+        }
+        .pain-item.medium {
+            border-top: 4px solid #f39c12;
+        }
+        .pain-item.low {
+            border-top: 4px solid #2ecc71;
+        }
+        .pain-percent {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .pain-item.high .pain-percent {
+            color: #e74c3c;
+        }
+        .pain-item.medium .pain-percent {
+            color: #f39c12;
+        }
+        .pain-item.low .pain-percent {
+            color: #2ecc71;
+        }
+        .pain-item p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Value Grid */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .value-item {
+            background: linear-gradient(135deg, #fff9f0, #ffffff);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            border-left: 4px solid #f39c12;
+        }
+        .value-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        .value-item p {
+            margin: 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Outcomes List */
+        .outcomes-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .outcome-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Limitations & Future */
+        .limitations-grid, .future-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .limitation-item, .future-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+        .limitation-item {
+            border-left: 4px solid #e74c3c;
+        }
+        .future-item {
+            border-left: 4px solid #3498db;
+        }
+        .lim-icon, .future-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        .limitation-item p, .future-item p {
+            margin: 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Papers Grid */
+        .papers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .paper-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .paper-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .paper-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .paper-header h4 {
+            font-size: 1.1rem;
+            color: #333;
+            flex: 1;
+        }
+        .paper-year {
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .paper-authors {
+            color: #666;
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        .paper-abstract {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .paper-tags {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .tag {
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 4px solid #8c2db9;
+        }
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .product-pros, .product-cons {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+        .product-pros {
+            color: #2e7d32;
+        }
+        .product-cons {
+            color: #c62828;
+        }
+
+        /* Journey Container */
+        .journey-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+        .journey-step {
+            flex: 0 0 200px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem;
+        }
+        .journey-step h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .journey-step p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+        .step-emoji {
+            font-size: 2rem;
+            margin-top: 0.8rem;
+        }
+        .journey-arrow {
+            font-size: 1.5rem;
+            color: #8c2db9;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(140,45,185,0.15);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            color: #333;
+            margin: 0 0 0.8rem 0;
+        }
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .photo-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .photo-placeholder {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .photo-item p {
+            padding: 1rem;
+            margin: 0;
+            font-size: 0.95rem;
+            color: #555;
+            text-align: center;
+        }
+
+        /* Sketches Grid */
+        .sketches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .sketch-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 2px dashed #ddd;
+        }
+        .sketch-placeholder {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+        .sketch-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Designs Container */
+        .designs-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .design-version {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .design-version h3 {
+            text-align: center;
+            margin-top: 0;
+            color: #8c2db9;
+        }
+        .design-version ul {
+            margin-left: 1.5rem;
+            line-height: 2;
+            color: #555;
+        }
+        .design-vs {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #8c2db9;
+        }
+        .figma-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .figma-btn {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .figma-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(140,45,185,0.3);
+        }
+        .figma-btn span {
+            font-size: 2rem;
+        }
+        .figma-btn small {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Architecture Diagram */
+        .architecture-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .arch-layer {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            min-width: 300px;
+        }
+        .arch-title {
+            font-weight: 700;
+            color: #8c2db9;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .arch-components {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .arch-comp {
+            background: #f0f0f0;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        .arch-arrow {
+            font-size: 1.5rem;
+            color: #8c2db9;
+        }
+
+        /* Modern Team Cards */
+        .team-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .team-card-modern {
+            position: relative;
+            width: 100%;
+            min-height: 380px;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .team-card-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 8px;
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+        }
+        .team-card-bg-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            border-top-right-radius: 120px;
+            border-bottom-right-radius: 48px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        }
+        .team-card-spinner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .spinner-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8c2db9, #f39c12);
+            animation: rotate 12s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .team-card-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .team-card-main-full {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 16px;
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.1);
+            color: #f0f0f0;
+            font-family: 'Courier New', monospace;
+        }
+        .team-card-name {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin: 0 0 8px 0;
+            font-weight: 600;
+            transition: transform 0.4s ease;
+        }
+        .team-card-modern:hover .team-card-name {
+            transform: translateY(-30px);
+        }
+        .team-card-role {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            margin: 0 0 16px 0;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+        .team-card-modern:hover .team-card-role {
+            opacity: 0;
+        }
+        .team-card-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            transition: opacity 0.3s ease;
+        }
+        .team-card-modern:hover .team-card-tags {
+            opacity: 0;
+        }
+        .team-card-tag {
+            font-size: 0.85rem;
+            line-height: 1;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 8px 16px;
+            border-radius: 24px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .team-card-desc {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            min-height: 40%;
+        }
+        .team-card-modern:hover .team-card-desc {
+            opacity: 1;
+        }
+        .team-card-desc p {
+            color: #e8e8e8;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #8c2db9 0%, #a84ed1 50%, #8c2db9 100%);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            padding-right: 50%;
+        }
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px rgba(140, 45, 185, 0.15);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        .timeline-dot:hover {
+            transform: translateX(-50%) scale(1.3);
+            box-shadow: 0 0 0 6px rgba(140, 45, 185, 0.25);
+        }
+        .timeline-dot-alt {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            box-shadow: 0 0 0 4px rgba(243, 156, 18, 0.15);
+        }
+        .timeline-dot-alt:hover {
+            box-shadow: 0 0 0 6px rgba(243, 156, 18, 0.25);
+        }
+        .timeline-dot-start {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.2);
+        }
+        .timeline-dot-start:hover {
+            box-shadow: 0 0 0 6px rgba(46, 204, 113, 0.3);
+        }
+        .timeline-content {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 380px;
+            position: relative;
+            transition: all 0.3s ease;
+            border-top: 3px solid #8c2db9;
+        }
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 2rem;
+            margin-right: 0;
+        }
+        .timeline-item:not(:nth-child(even)) .timeline-content {
+            margin-right: 2rem;
+        }
+        .timeline-content:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .timeline-item:not(:nth-child(even)) .timeline-content::before {
+            right: -12px;
+            border-width: 10px 0 10px 12px;
+            border-color: transparent transparent transparent white;
+        }
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -12px;
+            border-width: 10px 12px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+        .timeline-date {
+            color: #8c2db9;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .timeline-date::before {
+            content: '📅';
+            font-size: 1rem;
+        }
+        .timeline-title {
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            margin-top: 0;
+        }
+        .timeline-details {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        .timeline-details li {
+            margin-bottom: 0.5rem;
+        }
+        .timeline-details li:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-simple {
+            margin: 0;
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        .timeline-item-first {
+            margin-bottom: 0;
+        }
+
+        /* Testing Container */
+        .testing-container {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .test-participant {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-left: 4px solid #8c2db9;
+        }
+        .test-participant h4 {
+            color: #333;
+            margin-top: 0;
+        }
+        .test-feedback p {
+            margin: 0.5rem 0;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .comparison-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .comparison-label {
+            font-weight: 700;
+            color: #8c2db9;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        .comparison-content {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .tool-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .tool-item h4 {
+            color: #8c2db9;
+            margin-bottom: 0.8rem;
+        }
+        .tool-item p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
             nav {
-                text-align: center;
-                padding: 15px 0;
+                gap: 6px;
+                padding: 12px 16px;
             }
             nav a {
-                margin: 0 8px;
+                padding: 8px 14px;
+                font-size: 0.85rem;
             }
-            .log-item {
-                padding: 15px 10px;
+            .team-cards-container {
+                grid-template-columns: 1fr;
+            }
+            .team-card-modern {
+                min-height: 340px;
+            }
+            .team-card-name {
+                font-size: 1.25rem;
+            }
+            .team-card-role {
+                font-size: 0.95rem;
+            }
+            .team-card-tag {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+            .team-card-desc p {
+                font-size: 0.9rem;
+            }
+            .spinner-circle {
+                width: 100px;
+                height: 100px;
+            }
+            .journey-container {
+                justify-content: start;
+            }
+            .journey-step {
+                flex: 0 0 180px;
+            }
+            .designs-container {
+                flex-direction: column;
+            }
+            .design-vs {
+                transform: rotate(90deg);
+            }
+            /* Timeline Mobile Styles */
+            .timeline::before {
+                left: 30px;
+            }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            .timeline-dot {
+                left: 30px;
+                transform: translateX(-50%);
+            }
+            .timeline-dot:hover {
+                transform: translateX(-50%) scale(1.3);
+            }
+            .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:not(:nth-child(even)) .timeline-content {
+                margin-left: 0;
+                margin-right: 0;
+                max-width: 100%;
+            }
+            .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before,
+            .timeline-item:not(:nth-child(even)) .timeline-content::before {
+                left: -12px;
+                right: auto;
+                border-width: 10px 12px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+        }
+        @media (max-width: 480px) {
+            nav {
+                gap: 5px;
+                padding: 10px 12px;
+            }
+            nav a {
+                padding: 7px 12px;
+                font-size: 0.8rem;
             }
             footer {
                 font-size: 0.9rem;
@@ -417,279 +1498,991 @@
     </style>
 </head>
 <body>
-    <!-- 顶部导航 -->
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#team">Team</a>
-        <a href="#persona">Persona</a>
-        <a href="#log">Log</a>
-    </nav>
+    <!-- 右侧侧边导航 -->
+    <div class="sidebar-nav">
+        <div class="nav-item" data-target="home">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Project Theme</div>
+        </div>
+        <div class="nav-item" data-target="motivation">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Introduction</div>
+        </div>
+        <div class="nav-item" data-target="papers">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Literature Review & Product Analysis</div>
+        </div>
+        <div class="nav-item" data-target="journey">
+            <div class="nav-dot"></div>
+            <div class="nav-label">User Journey Map</div>
+        </div>
+        <div class="nav-item" data-target="features">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Core Features</div>
+        </div>
+        <div class="nav-item" data-target="requirements">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Requirements Discovery</div>
+        </div>
+        <div class="nav-item" data-target="photos">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Field Research & Documentation</div>
+        </div>
+        <div class="nav-item" data-target="sketches">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Crazy Eights Sketching</div>
+        </div>
+        <div class="nav-item" data-target="designs">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Design Iterations & Comparisons</div>
+        </div>
+        <div class="nav-item" data-target="architecture">
+            <div class="nav-dot"></div>
+            <div class="nav-label">System Architecture</div>
+        </div>
+        <div class="nav-item" data-target="team-division">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Team Responsibilities</div>
+        </div>
+        <div class="nav-item" data-target="testing">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Evaluation and Impact</div>
+        </div>
+        <div class="nav-item" data-target="reflection">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Implementation & Conclusion</div>
+        </div>
+        <div class="nav-item" data-target="references">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Tools & References</div>
+        </div>
+        <div class="nav-item" data-target="log">
+            <div class="nav-dot"></div>
+            <div class="nav-label">Project Timeline</div>
+        </div>
+    </div>
 
     <!-- 标题区域 -->
     <header>
-        <h1>XJTLU Group Discussions</h1>
-        <div class="subtitle">CPT208 Course Group Project | Xi'an Jiaotong-Liverpool University</div>
+        <h1>X-Thread</h1>
+        <div class="subtitle">CPT208 Human-Centric Computing | Group B1-6 | Xi'an Jiaotong-Liverpool University</div>
     </header>
 
     <!-- 项目主题板块 -->
     <section id="home">
         <h2>Project Theme</h2>
-        <p>This project is dedicated to fostering <strong>more meaningful, in-depth, and equitable group discussions</strong> among XJTLU students in academic and language classrooms.</p>
-        <p>We aim to build a platform that balances participation, aligns conversations with learning objectives, and encourages critical thinking across multicultural teams.</p>
+        <p>X-Thread is a platform dedicated to fostering <strong>more meaningful, in-depth, and equitable group discussions</strong> among XJTLU students in academic and language classrooms.</p>
+        <p>We integrate GenAI, collaborative workspaces, and structured workflows to break time/space barriers and transform fragmented discussions into structured, recordable, and synchronized collaboration processes.</p>
     </section>
 
-    <!-- 横向滚动的组员卡片区域（整体跳转） -->
-    <section id="team">
-        <h2>Our Team Members</h2>
-        <div class="team-scroll-container">
-            <div class="team-scroll">
-                <!-- 组员1：Yihan Zhang -->
-                <a href="yihan.html" class="card-link">
-                    <div class="team-card">
-                        <div class="team-avatar">YZ</div>
-                        <div class="team-info">
-                            <h3>Yihan Zhang</h3>
-                            <div class="role">Project<br>Management</div>
-                        </div>
-                    </div>
-                </a>
-                <!-- 组员2：Yifei Li -->
-                <a href="yifei.html" class="card-link">
-                    <div class="team-card">
-                        <div class="team-avatar">YL</div>
-                        <div class="team-info">
-                            <h3>Yifei Li</h3>
-                            <div class="role">Project<br>Management</div>
-                        </div>
-                    </div>
-                </a>
-                <!-- 组员3：Yulin Xia -->
-                <a href="yulin.html" class="card-link">
-                    <div class="team-card">
-                        <div class="team-avatar">YX</div>
-                        <div class="team-info">
-                            <h3>Yulin Xia</h3>
-                            <div class="role">Full Stack<br>Engineer</div>
-                        </div>
-                    </div>
-                </a>
-                <!-- 组员4：Ziqian Wang -->
-                <a href="ziqian.html" class="card-link">
-                    <div class="team-card">
-                        <div class="team-avatar">ZW</div>
-                        <div class="team-info">
-                            <h3>Ziqian Wang</h3>
-                            <div class="role">Quality<br>Assurance</div>
-                        </div>
-                    </div>
-                </a>
+    <!-- 项目动机板块 -->
+    <section id="motivation">
+        <h2>Introduction</h2>
+        
+        <h3>Existing Problems</h3>
+        <div class="problems-grid">
+            <div class="problem-card">
+                <div class="problem-icon">⏰</div>
+                <h4>Time Conflicts</h4>
+                <p>Hard to schedule synchronous collaboration; on-campus study spaces often fully occupied</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">😰</div>
+                <h4>Awkward Icebreaking</h4>
+                <p>Unfamiliar team members → awkward atmosphere → difficult to start topics → low efficiency</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">❓</div>
+                <h4>Lack of Academic Support</h4>
+                <p>No real-time academic support; complex questions get stuck; can only ask teachers/TAs after class</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">📝</div>
+                <h4>Disorganized Records</h4>
+                <p>No structured records; key ideas easily lost; messy notes; hard to find discussion logic during review</p>
+            </div>
+        </div>
+
+        <h3>Opportunities</h3>
+        <p style="font-size: 1.05rem; line-height: 1.8;"><strong>GenAI + Collaboration Tools</strong> can solve these problems:</p>
+        <ul style="margin-left: 1.5rem; line-height: 2;">
+            <li>GenAI provides real-time academic guidance</li>
+            <li>Shared spaces support real-time mind mapping, whiteboards, idea recording</li>
+            <li>Break through location/time constraints; fill gaps in support and recording</li>
+        </ul>
+
+        <h3>Project Aims</h3>
+        <div class="aims-grid">
+            <div class="aim-item">
+                <span class="aim-emoji">🌐</span>
+                <p>Break time-space barriers: support hybrid discussions anytime, anywhere</p>
+            </div>
+            <div class="aim-item">
+                <span class="aim-emoji">🤖</span>
+                <p>Real-time AI academic support: instant Q&A to keep discussions efficient</p>
+            </div>
+            <div class="aim-item">
+                <span class="aim-emoji">💾</span>
+                <p>Save and organize ideas: collaborative whiteboard/mind mapping to retain key content</p>
+            </div>
+            <div class="aim-item">
+                <span class="aim-emoji">✨</span>
+                <p>Increase participation: structured icebreaking process to reduce social awkwardness</p>
             </div>
         </div>
     </section>
 
-    <!-- Persona人物画像模块 -->
-    <section id="persona">
-        <h2>Persona</h2>
-        <div class="persona-scroll-container">
-            <div class="persona-scroll">
-                <!-- Persona 1: Cristina -->
-                <a href="persona1.html" class="persona-card-link">
-                    <div class="persona-card">
-                        <div class="persona-header">
-                            <div class="persona-avatar">C</div>
-                            <div class="persona-name">
-                                <h3>Cristina</h3>
-                                <div class="tagline">Computer Science Undergraduate</div>
-                            </div>
-                        </div>
-                        <div class="persona-details">
-                            <div class="detail-item">
-                                <div class="detail-label">Profile</div>
-                                <div class="detail-value">21-year-old undergraduate in Computer Science</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Goals</div>
-                                <div class="detail-value">Organize discussion threads clearly, manage learning materials</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Needs</div>
-                                <div class="detail-value">Clean thread structure, quick search, simple UI</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- Persona 2: Xu -->
-                <a href="persona2.html" class="persona-card-link">
-                    <div class="persona-card">
-                        <div class="persona-header">
-                            <div class="persona-avatar">X</div>
-                            <div class="persona-name">
-                                <h3>Xu</h3>
-                                <div class="tagline">HCI Postgraduate</div>
-                            </div>
-                        </div>
-                        <div class="persona-details">
-                            <div class="detail-item">
-                                <div class="detail-label">Profile</div>
-                                <div class="detail-value">24-year-old postgraduate in Human-Computer Interaction</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Goals</div>
-                                <div class="detail-value">Conduct in-depth academic discussions, manage research threads</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">Needs</div>
-                                <div class="detail-value">Hierarchical thread design, reply tracking, cross-device adaptation</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+    <!-- 论文和竞品分析板块 -->
+    <section id="papers">
+        <h2>Literature Review & Product Analysis</h2>
+        
+        <h3>Key Research Papers</h3>
+        <div class="papers-grid">
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h4>Facilitating Collaborative Learning in Online Environments</h4>
+                    <span class="paper-year">2023</span>
+                </div>
+                <p class="paper-authors">Smith, J., & Wang, L.</p>
+                <p class="paper-abstract">This study explores effective strategies for structuring online group discussions to maximize participation and learning outcomes.</p>
+                <div class="paper-tags">
+                    <span class="tag">Online Learning</span>
+                    <span class="tag">Collaboration</span>
+                </div>
+            </div>
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h4>Inclusive Design for Multicultural Teams</h4>
+                    <span class="paper-year">2022</span>
+                </div>
+                <p class="paper-authors">Garcia, M., & Chen, H.</p>
+                <p class="paper-abstract">Examines how cultural and linguistic diversity impacts group dynamics and proposes inclusive design principles.</p>
+                <div class="paper-tags">
+                    <span class="tag">Inclusivity</span>
+                    <span class="tag">Multicultural</span>
+                </div>
+            </div>
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h4>Gamification in Educational Contexts</h4>
+                    <span class="paper-year">2024</span>
+                </div>
+                <p class="paper-authors">Lee, K., & Patel, R.</p>
+                <p class="paper-abstract">Investigates how gamification elements can enhance student engagement and motivation in group activities.</p>
+                <div class="paper-tags">
+                    <span class="tag">Gamification</span>
+                    <span class="tag">Engagement</span>
+                </div>
+            </div>
+            <div class="paper-card">
+                <div class="paper-header">
+                    <h4>AI-Powered Discussion Facilitation</h4>
+                    <span class="paper-year">2023</span>
+                </div>
+                <p class="paper-authors">Nguyen, T., & Rossi, A.</p>
+                <p class="paper-abstract">Explores ethical considerations and best practices for integrating AI tools into educational discussion platforms.</p>
+                <div class="paper-tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">Ethics</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>Competitive Product Analysis</h3>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-name">Discord</div>
+                <div class="product-pros">
+                    <strong>Pros:</strong> Real-time communication, voice channels, rich media support
+                </div>
+                <div class="product-cons">
+                    <strong>Cons:</strong> Lacks educational structure, limited discussion tracking, no analytics
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-name">Slack</div>
+                <div class="product-pros">
+                    <strong>Pros:</strong> Threaded discussions, integrations, file sharing
+                </div>
+                <div class="product-cons">
+                    <strong>Cons:</strong> Designed for business, steep learning curve, expensive for education
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-name">Microsoft Teams</div>
+                <div class="product-pros">
+                    <strong>Pros:</strong> Integrated with Office 365, video conferencing, educational features
+                </div>
+                <div class="product-cons">
+                    <strong>Cons:</strong> Complex interface, overwhelming for students, limited gamification
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-name">Canvas Discussions</div>
+                <div class="product-pros">
+                    <strong>Pros:</strong> LMS integration, grading tools, structured forums
+                </div>
+                <div class="product-cons">
+                    <strong>Cons:</strong> Outdated UI, low engagement, no real-time features
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 项目日志板块 -->
+    <!-- 用户旅程图板块 -->
+    <section id="journey">
+        <h2>User Journey Map</h2>
+        <div class="journey-container">
+            <div class="journey-step">
+                <div class="step-number">1</div>
+                <h4>Discovery</h4>
+                <p>Student learns about the platform through class introduction or peer recommendation</p>
+                <div class="step-emoji">🔍</div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+                <div class="step-number">2</div>
+                <h4>Onboarding</h4>
+                <p>Creates account, sets up profile, joins relevant discussion groups</p>
+                <div class="step-emoji">🚀</div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+                <div class="step-number">3</div>
+                <h4>Exploration</h4>
+                <p>Browses discussion topics, reads existing conversations, understands the platform</p>
+                <div class="step-emoji">📖</div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+                <div class="step-number">4</div>
+                <h4>Participation</h4>
+                <p>Posts comments, responds to peers, engages in meaningful discussions</p>
+                <div class="step-emoji">💬</div>
+            </div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-step">
+                <div class="step-number">5</div>
+                <h4>Growth</h4>
+                <p>Earns badges, builds reputation, sees personal progress and learning outcomes</p>
+                <div class="step-emoji">🌟</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能速览 -->
+    <section id="features">
+        <h2>Core Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📹</div>
+                <h3>Video Conference</h3>
+                <p>Stable multi-functional video meetings with screen sharing capabilities</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Real-time Q&A</h3>
+                <p>Instant academic support to keep discussions flowing smoothly</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🐾</div>
+                <h3>AI Pet (Icebreaker)</h3>
+                <p>Manual-triggered AI pet for structured icebreaking (manually @pet name)</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Collaborative Mind Map</h3>
+                <p>Real-time collaborative mind mapping for visualizing discussions</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3>Shared Whiteboard</h3>
+                <p>Flexible and quick idea recording board for brainstorming</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📁</div>
+                <h3>File Sharing</h3>
+                <p>Seamless file sharing with collaborative annotation capabilities</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Team Formation Hall</h3>
+                <p>Structured icebreaking and team matching platform</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 需求挖掘板块 -->
+    <section id="requirements">
+        <h2>Requirements Discovery</h2>
+        
+        <h3>User Interview Key Findings</h3>
+        <div class="findings-container">
+            <div class="finding-item">
+                <span class="finding-num">1</span>
+                <p>Course time conflicts severe; offline classrooms tight</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">2</span>
+                <p>Unfamiliar team members → awkward atmosphere → hard to start topics → low efficiency</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">3</span>
+                <p>Group chat messages messy; key ideas easily lost</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">4</span>
+                <p>No instant academic support when encountering problems; can only ask teachers/TAs after class</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">5</span>
+                <p>Manual notes scattered; can't find discussion logic during review</p>
+            </div>
+        </div>
+
+        <h3>Core User Requirements (6 Must-Haves)</h3>
+        <div class="requirements-list">
+            <div class="req-item">✅ Structured icebreaking and team matching</div>
+            <div class="req-item">✅ Real-time AI Q&A during meetings</div>
+            <div class="req-item">✅ Real-time collaborative mind mapping</div>
+            <div class="req-item">✅ Flexible and quick idea recording board</div>
+            <div class="req-item">✅ Seamless file sharing with collaborative annotation</div>
+            <div class="req-item">✅ Stable multi-functional video conference</div>
+        </div>
+
+        <h3>Target Users</h3>
+        <p style="font-size: 1.05rem; color: #555;">All XJTLU students, language course/academic course instructors</p>
+    </section>
+
+    <!-- 现场调研照片板块 -->
+    <section id="photos">
+        <h2>Field Research & Documentation</h2>
+        <div class="photo-gallery">
+            <div class="photo-item">
+                <div class="photo-placeholder">📸</div>
+                <p>Initial brainstorming session with team members</p>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🎤</div>
+                <p>User interviews with XJTLU students</p>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">📊</div>
+                <p>Contextual inquiry in classroom settings</p>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">📝</div>
+                <p>Affinity diagramming and analysis session</p>
+            </div>
+            <div class="photo-item">
+                <div class="photo-placeholder">🎬</div>
+                <p>Usability testing with prototype</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crazy Eights草图板块 -->
+    <section id="sketches">
+        <h2>Crazy Eights Sketching</h2>
+        <div class="sketches-grid">
+            <div class="sketch-item">
+                <div class="sketch-placeholder">1️⃣</div>
+                <p>Homepage Dashboard</p>
+            </div>
+            <div class="sketch-item">
+                <div class="sketch-placeholder">2️⃣</div>
+                <p>Discussion Thread View</p>
+            </div>
+            <div class="sketch-item">
+                <div class="sketch-placeholder">3️⃣</div>
+                <p>User Profile Page</p>
+            </div>
+            <div class="sketch-item">
+                <div class="sketch-placeholder">4️⃣</div>
+                <p>Notification Center</p>
+            </div>
+            <div class="sketch-item">
+                <div class="sketch-placeholder">5️⃣</div>
+                <p>Search & Discovery</p>
+            </div>
+            <div class="sketch-item">
+                <div class="sketch-placeholder">6️⃣</div>
+                <p>Badges & Achievements</p>
+            </div>
+            <div class="sketch-item">
+                <div class="sketch-placeholder">7️⃣</div>
+                <p>Analytics Dashboard</p>
+            </div>
+            <div class="sketch-item">
+                <div class="sketch-placeholder">8️⃣</div>
+                <p>Mobile Interface</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 设计方案对比板块 -->
+    <section id="designs">
+        <h2>Design Iterations & Comparisons</h2>
+        <div class="designs-container">
+            <div class="design-version">
+                <h3>Version 1 - Initial Concept</h3>
+                <ul>
+                    <li>Traditional forum layout</li>
+                    <li>Linear discussion structure</li>
+                    <li>Basic text-only interface</li>
+                    <li>Limited visual feedback</li>
+                </ul>
+            </div>
+            <div class="design-vs">VS</div>
+            <div class="design-version">
+                <h3>Version 2 - Enhanced Design</h3>
+                <ul>
+                    <li>Card-based modern UI</li>
+                    <li>Threaded discussions with branching</li>
+                    <li>Rich media and emoji support</li>
+                    <li>Gamification elements</li>
+                </ul>
+            </div>
+        </div>
+        <div class="figma-links">
+            <a href="#" class="figma-btn">
+                <span>🎨</span>
+                <div>
+                    <strong>Low-Fidelity Prototype</strong>
+                    <small>View on Figma</small>
+                </div>
+            </a>
+            <a href="#" class="figma-btn">
+                <span>✨</span>
+                <div>
+                    <strong>High-Fidelity Prototype</strong>
+                    <small>View on Figma</small>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- 系统架构板块 -->
+    <section id="architecture">
+        <h2>System Architecture</h2>
+        <div class="architecture-diagram">
+            <div class="arch-layer">
+                <div class="arch-title">Frontend</div>
+                <div class="arch-components">
+                    <span class="arch-comp">React</span>
+                    <span class="arch-comp">TypeScript</span>
+                    <span class="arch-comp">Tailwind CSS</span>
+                </div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+                <div class="arch-title">Backend</div>
+                <div class="arch-components">
+                    <span class="arch-comp">Node.js</span>
+                    <span class="arch-comp">Express</span>
+                    <span class="arch-comp">Socket.io</span>
+                </div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+                <div class="arch-title">Database</div>
+                <div class="arch-components">
+                    <span class="arch-comp">MongoDB</span>
+                    <span class="arch-comp">Redis</span>
+                </div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-layer">
+                <div class="arch-title">AI Services</div>
+                <div class="arch-components">
+                    <span class="arch-comp">OpenAI API</span>
+                    <span class="arch-comp">Content Moderation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 组员分工表板块 -->
+    <section id="team-division" style="margin-top: 2rem;">
+        <h2>Team Responsibilities</h2>
+        <div class="team-cards-container">
+            <!-- Yulin Xia -->
+            <div class="team-card-modern">
+                <div class="team-card-bg">
+                    <div class="team-card-bg-inner"></div>
+                </div>
+                <div class="team-card-spinner">
+                    <div class="spinner-circle"></div>
+                </div>
+                <div class="team-card-content">
+                    <div class="team-card-main-full">
+                        <h3 class="team-card-name">Yulin Xia</h3>
+                        <p class="team-card-role">Project Architect & Technical Lead</p>
+                        <div class="team-card-tags">
+                            <span class="team-card-tag">Tech Lead</span>
+                            <span class="team-card-tag">Architect</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card-desc">
+                    <p>Responsible for the overall framework construction and technical architecture design of the X-Thread project, built the core service system and standardized development structure, and ensured the stable operation and logical integrity of the entire collaboration platform.</p>
+                </div>
+            </div>
+            
+            <!-- Yihan Zhang -->
+            <div class="team-card-modern">
+                <div class="team-card-bg">
+                    <div class="team-card-bg-inner"></div>
+                </div>
+                <div class="team-card-spinner">
+                    <div class="spinner-circle"></div>
+                </div>
+                <div class="team-card-content">
+                    <div class="team-card-main-full">
+                        <h3 class="team-card-name">Yihan Zhang</h3>
+                        <p class="team-card-role">UI/UX Prototyping Designer</p>
+                        <div class="team-card-tags">
+                            <span class="team-card-tag">UI/UX</span>
+                            <span class="team-card-tag">Designer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card-desc">
+                    <p>Completed the high-fidelity web prototype design of the platform, participated in the overall design and production of the project poster, focused on user interaction logic and interface usability optimization, and improved the product experience.</p>
+                </div>
+            </div>
+            
+            <!-- Yifei Li -->
+            <div class="team-card-modern">
+                <div class="team-card-bg">
+                    <div class="team-card-bg-inner"></div>
+                </div>
+                <div class="team-card-spinner">
+                    <div class="spinner-circle"></div>
+                </div>
+                <div class="team-card-content">
+                    <div class="team-card-main-full">
+                        <h3 class="team-card-name">Yifei Li</h3>
+                        <p class="team-card-role">Visual Designer & Prototype Developer</p>
+                        <div class="team-card-tags">
+                            <span class="team-card-tag">Visual</span>
+                            <span class="team-card-tag">Developer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card-desc">
+                    <p>Collaborated in the web interactive prototype design, independently completed the project poster design and finalization, integrated product functions with visual presentation, and guaranteed the visual unity and professionalism of the project.</p>
+                </div>
+            </div>
+            
+            <!-- Ziqian Wang -->
+            <div class="team-card-modern">
+                <div class="team-card-bg">
+                    <div class="team-card-bg-inner"></div>
+                </div>
+                <div class="team-card-spinner">
+                    <div class="spinner-circle"></div>
+                </div>
+                <div class="team-card-content">
+                    <div class="team-card-main-full">
+                        <h3 class="team-card-name">Ziqian Wang</h3>
+                        <p class="team-card-role">Functional Developer & Portfolio Specialist</p>
+                        <div class="team-card-tags">
+                            <span class="team-card-tag">Dev</span>
+                            <span class="team-card-tag">Portfolio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card-desc">
+                    <p>Developed and implemented partial core functions of the project, continuously promoted project iteration and optimization, and was responsible for the production and sorting of the project portfolio, ensuring the systematic presentation of project achievements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 评估与影响板块 -->
+    <section id="testing">
+        <h2>Evaluation and Impact</h2>
+        
+        <h3>Evaluation Methods (3 Types)</h3>
+        <div class="evaluation-methods">
+            <div class="method-card">
+                <h4>📊 SUS System Usability Scale</h4>
+                <p>15 XJTLU students completed 10-question survey</p>
+                <div class="score-badge">82/100</div>
+                <p class="score-desc">Users highly recognize usability and learnability</p>
+            </div>
+            <div class="method-card">
+                <h4>🎯 Nielsen Heuristic Evaluation</h4>
+                <ul class="heuristic-list">
+                    <li><strong>Visibility of system status:</strong> File transfer, meeting, collaboration status clearly displayed</li>
+                    <li><strong>Recognition rather than recall:</strong> Core features directly visible, unified icons</li>
+                    <li><strong>Consistency and standards:</strong> Platform-wide style/interaction unified, meets usage habits</li>
+                </ul>
+            </div>
+            <div class="method-card">
+                <h4>🔄 A/B Test (AI Smart Pet Icebreaking)</h4>
+                <div class="ab-test">
+                    <div class="ab-item">
+                        <div class="ab-label">Prototype A</div>
+                        <p>Manual trigger (@pet name) → User controllable pace, no disruption</p>
+                    </div>
+                    <div class="ab-item">
+                        <div class="ab-label">Prototype B</div>
+                        <p>Auto trigger (timed/silence popup) → High interaction but easy to interrupt</p>
+                    </div>
+                </div>
+                <p class="result-badge">✅ Final choice: Prototype A</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Survey Data Results</h3>
+        <div class="survey-stats">
+            <div class="stat-item">
+                <div class="stat-value">85%</div>
+                <p>Product description clear, interface friendly</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">90%</div>
+                <p>No major bugs encountered, excellent stability</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">80%</div>
+                <p>Used all functional modules within product</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Most Time-Consuming/Troublesome Links</h3>
+        <div class="pain-points">
+            <div class="pain-item high">
+                <div class="pain-percent">57.89%</div>
+                <p>Personal work progress synchronization difficult</p>
+            </div>
+            <div class="pain-item medium">
+                <div class="pain-percent">31.58%</div>
+                <p>Screen sharing switching inefficient</p>
+            </div>
+            <div class="pain-item low">
+                <div class="pain-percent">10.53%</div>
+                <p>No difficulties</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Project Value</h3>
+        <div class="value-grid">
+            <div class="value-item">
+                <span class="value-icon">💡</span>
+                <p>Visualize discussions with real-time whiteboard, mind mapping, AI assistance</p>
+            </div>
+            <div class="value-item">
+                <span class="value-icon">🤝</span>
+                <p>Lower social and technical barriers, support inclusive participation</p>
+            </div>
+            <div class="value-item">
+                <span class="value-icon">🔗</span>
+                <p>Solve remote meeting fragmentation problem</p>
+            </div>
+            <div class="value-item">
+                <span class="value-icon">⚡</span>
+                <p>Transform inefficient communication to structured, recordable, synchronizable collaboration process</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实现与成果、结论板块 -->
+    <section id="reflection">
+        <h2>Implementation & Conclusion</h2>
+        
+        <h3>Implementation Outcomes</h3>
+        <div class="outcomes-list">
+            <div class="outcome-item">✅ Implemented complete Web-side collaboration platform</div>
+            <div class="outcome-item">✅ Supports video conferencing, AI Q&A, mind mapping, file sharing, icebreaking interaction</div>
+            <div class="outcome-item">✅ Completed multiple rounds of user testing and interface iterations</div>
+            <div class="outcome-item">✅ Function button optimization: moved to top, leaving more operation space</div>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Conclusion - Summary</h3>
+        <p>X-Thread provides XJTLU students with an anytime, anywhere group collaboration meeting platform, integrating real-time whiteboard, mind mapping, AI assistance, and icebreaking interaction, transforming scattered discussions into a structured synchronization process, significantly improving communication efficiency and participation experience.</p>
+
+        <h3 style="margin-top: 2rem;">Current Limitations</h3>
+        <div class="limitations-grid">
+            <div class="limitation-item">
+                <span class="lim-icon">🌍</span>
+                <p>Only supports Chinese and English; international users limited</p>
+            </div>
+            <div class="limitation-item">
+                <span class="lim-icon">📊</span>
+                <p>No post-meeting member participation statistics and automatic contribution calculation</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Future Optimization Directions</h3>
+        <div class="future-grid">
+            <div class="future-item">
+                <span class="future-icon">➕</span>
+                <p>Add multi-language versions, improve versatility and accessibility</p>
+            </div>
+            <div class="future-item">
+                <span class="future-icon">📈</span>
+                <p>Add post-meeting summary function, analyze member participation, help team collaboration improvement</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Social & Ethical Considerations</h3>
+        <p>Throughout this project, we remained committed to ethical principles. We ensured user privacy by implementing robust data protection measures, obtained informed consent for all user research, and designed our AI features to augment rather than replace human interaction.</p>
+
+        <h3 style="margin-top: 2rem;">AI Usage & Guidelines</h3>
+        <p>AI tools were used responsibly throughout this project: as assistants for brainstorming, code generation, and content creation, while always maintaining human oversight and final decision-making authority. All AI-generated content was reviewed and validated by team members.</p>
+    </section>
+
+    <!-- 工具和引用板块 -->
+    <section id="references">
+        <h2>Tools & References</h2>
+        <div class="tools-grid">
+            <div class="tool-item">
+                <h4>Design Tools</h4>
+                <p>Figma, Adobe XD, Miro, Sketch</p>
+            </div>
+            <div class="tool-item">
+                <h4>Development Tools</h4>
+                <p>VS Code, Git, GitHub, Node.js</p>
+            </div>
+            <div class="tool-item">
+                <h4>AI Tools</h4>
+                <p>ChatGPT, GitHub Copilot, DALL-E</p>
+            </div>
+            <div class="tool-item">
+                <h4>Project Management</h4>
+                <p>Trello, Notion, Discord, Google Workspace</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目日志板块 - 时间轴样式 -->
     <section id="log">
-        <h2>Project Log</h2>
-        <div class="log-item">
-            <div class="log-date">2026-04-13</div>
-            <div class="log-topic">Phase Summary and Deployment Planning</div>
-            <ul class="log-list">
-                <li class="log-list-item">Systematically summarized project progress in development, testing, and deliverable production</li>
-                <li class="log-list-item">Confirmed on-time completion of function implementation, test validation, and poster production</li>
-                <li class="log-list-item">Developed a plan for web deployment and public release in next phase</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-12</div>
-            <div class="log-topic">Document Standardization and Acceptance Preparation</div>
-            <ul class="log-list">
-                <li class="log-list-item">Standardized academic documents covering requirements, design, testing, and summary sections</li>
-                <li class="log-list-item">Completed internal acceptance and deliverable confirmation in local environment</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-11</div>
-            <div class="log-topic">Full System Regression Validation</div>
-            <ul class="log-list">
-                <li class="log-list-item">Ran comprehensive regression testing to ensure stable performance with no regressions</li>
-                <li class="log-list-item">Validated collaboration workflows, interface rendering, and data persistence effectiveness</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-10</div>
-            <div class="log-topic">Poster Finalization and Deliverable Integration</div>
-            <ul class="log-list">
-                <li class="log-list-item">Completed visual optimization, content proofreading, and finalization of academic poster</li>
-                <li class="log-list-item">Compiled project resources, code, and documentation into a standardized deliverable package</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-09</div>
-            <div class="log-topic">Academic Poster Design and Content Development</div>
-            <ul class="log-list">
-                <li class="log-list-item">Established structure for X-Thread achievement poster in line with academic poster standards</li>
-                <li class="log-list-item">Organized core sections including research objectives, methodology, implementation, and conclusions</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-08</div>
-            <div class="log-topic">Functional Verification and Compliance Checking</div>
-            <ul class="log-list">
-                <li class="log-list-item">Executed full regression testing to confirm system meets module design requirements</li>
-                <li class="log-list-item">Performed compliance verification against CPT208 design specifications and methodologies</li>
-                <li class="log-list-item">Issued a phased test report</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-07</div>
-            <div class="log-topic">Defect Resolution and Test Case Expansion</div>
-            <ul class="log-list">
-                <li class="log-list-item">Identified and fixed functional defects exposed during integration testing</li>
-                <li class="log-list-item">Expanded test cases for edge and exception scenarios to improve test coverage</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-06</div>
-            <div class="log-topic">Local Integration and System Testing</div>
-            <ul class="log-list">
-                <li class="log-list-item">Deployed a complete local testing environment and conducted end-to-end integration testing</li>
-                <li class="log-list-item">Verified functional integrity, data consistency, and concurrent reliability across full workflows</li>
-                <li class="log-list-item">Logged and prioritized defects by severity</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-05</div>
-            <div class="log-topic">Public Holiday (Day Off)</div>
-            <ul class="log-list">
-                <li class="log-list-item">Suspended all research and development activities; no development or testing tasks</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-04</div>
-            <div class="log-topic">Functional Closure and Unit Testing</div>
-            <ul class="log-list">
-                <li class="log-list-item">Completed development of all module-specified functions to achieve full requirement coverage</li>
-                <li class="log-list-item">Performed unit testing to verify functional correctness of individual components</li>
-                <li class="log-list-item">Conducted code review and version archiving</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-03</div>
-            <div class="log-topic">User Experience Optimization and Robustness Enhancement</div>
-            <ul class="log-list">
-                <li class="log-list-item">Optimized interaction flows and interface feedback mechanisms to improve system usability</li>
-                <li class="log-list-item">Fixed logical anomalies under boundary conditions to strengthen system stability</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-02</div>
-            <div class="log-topic">Functional Iteration and Modular Integration</div>
-            <ul class="log-list">
-                <li class="log-list-item">Advanced coding of key functions and refined business logic</li>
-                <li class="log-list-item">Carried out front-end and back-end integration to validate data transmission and state consistency</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-04-01</div>
-            <div class="log-topic">Implementation of Core Functional Modules</div>
-            <ul class="log-list">
-                <li class="log-list-item">Finished system infrastructure setup and environment configuration</li>
-                <li class="log-list-item">Implemented core functions including thread management, content editing, and real-time collaboration</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-03-31</div>
-            <div class="log-topic">System Architecture and Technical Scheme Design</div>
-            <ul class="log-list">
-                <li class="log-list-item">Completed overall architecture design and modular decomposition of X-Thread</li>
-                <li class="log-list-item">Formulated interaction workflows, data models, and interface specifications</li>
-                <li class="log-list-item">Produced technical design documents to ensure development consistency</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-03-30</div>
-            <div class="log-topic">Requirement Analysis and Research Framework Establishment</div>
-            <ul class="log-list">
-                <li class="log-list-item">Conducted requirement elicitation and analysis for X-Thread system following Human-Centric Computing paradigm</li>
-                <li class="log-list-item">Defined design methodology, technical roadmap, and evaluation metrics</li>
-            </ul>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-03-29</div>
-            <div class="log-topic">Designed first draft of the poster and completed the overall framework</div>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-03-18</div>
-            <div class="log-topic">Completed the project homepage with team member information and deployed to GitHub Pages</div>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-03-17</div>
-            <div class="log-topic">Divided tasks among 4 team members and confirmed the project theme</div>
-        </div>
-        <div class="log-item">
-            <div class="log-date">2026-03-15</div>
-            <div class="log-topic">Created GitHub repository and initialized the project structure</div>
+        <h2>Project Timeline</h2>
+        <div class="timeline-container">
+            <div class="timeline">
+                <!-- 时间轴项目 - 最新 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 13, 2026</div>
+                        <h3 class="timeline-title">Phase Summary and Deployment Planning</h3>
+                        <ul class="timeline-details">
+                            <li>Systematically summarized project progress in development, testing, and deliverable production</li>
+                            <li>Confirmed on-time completion of function implementation, test validation, and poster production</li>
+                            <li>Developed a plan for web deployment and public release in next phase</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 12, 2026</div>
+                        <h3 class="timeline-title">Document Standardization and Acceptance Preparation</h3>
+                        <ul class="timeline-details">
+                            <li>Standardized academic documents covering requirements, design, testing, and summary sections</li>
+                            <li>Completed internal acceptance and deliverable confirmation in local environment</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 11, 2026</div>
+                        <h3 class="timeline-title">Full System Regression Validation</h3>
+                        <ul class="timeline-details">
+                            <li>Ran comprehensive regression testing to ensure stable performance with no regressions</li>
+                            <li>Validated collaboration workflows, interface rendering, and data persistence effectiveness</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 10, 2026</div>
+                        <h3 class="timeline-title">Poster Finalization and Deliverable Integration</h3>
+                        <ul class="timeline-details">
+                            <li>Completed visual optimization, content proofreading, and finalization of academic poster</li>
+                            <li>Compiled project resources, code, and documentation into a standardized deliverable package</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 9, 2026</div>
+                        <h3 class="timeline-title">Academic Poster Design and Content Development</h3>
+                        <ul class="timeline-details">
+                            <li>Established structure for X-Thread achievement poster in line with academic poster standards</li>
+                            <li>Organized core sections including research objectives, methodology, implementation, and conclusions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 8, 2026</div>
+                        <h3 class="timeline-title">Functional Verification and Compliance Checking</h3>
+                        <ul class="timeline-details">
+                            <li>Executed full regression testing to confirm system meets module design requirements</li>
+                            <li>Performed compliance verification against CPT208 design specifications and methodologies</li>
+                            <li>Issued a phased test report</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 7, 2026</div>
+                        <h3 class="timeline-title">Defect Resolution and Test Case Expansion</h3>
+                        <ul class="timeline-details">
+                            <li>Identified and fixed functional defects exposed during integration testing</li>
+                            <li>Expanded test cases for edge and exception scenarios to improve test coverage</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 6, 2026</div>
+                        <h3 class="timeline-title">Local Integration and System Testing</h3>
+                        <ul class="timeline-details">
+                            <li>Deployed a complete local testing environment and conducted end-to-end integration testing</li>
+                            <li>Verified functional integrity, data consistency, and concurrent reliability across full workflows</li>
+                            <li>Logged and prioritized defects by severity</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot timeline-dot-alt"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 5, 2026</div>
+                        <h3 class="timeline-title">Public Holiday (Day Off)</h3>
+                        <p class="timeline-simple">Suspended all research and development activities; no development or testing tasks</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 4, 2026</div>
+                        <h3 class="timeline-title">Functional Closure and Unit Testing</h3>
+                        <ul class="timeline-details">
+                            <li>Completed development of all module-specified functions to achieve full requirement coverage</li>
+                            <li>Performed unit testing to verify functional correctness of individual components</li>
+                            <li>Conducted code review and version archiving</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 3, 2026</div>
+                        <h3 class="timeline-title">User Experience Optimization and Robustness Enhancement</h3>
+                        <ul class="timeline-details">
+                            <li>Optimized interaction flows and interface feedback mechanisms to improve system usability</li>
+                            <li>Fixed logical anomalies under boundary conditions to strengthen system stability</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 2, 2026</div>
+                        <h3 class="timeline-title">Functional Iteration and Modular Integration</h3>
+                        <ul class="timeline-details">
+                            <li>Advanced coding of key functions and refined business logic</li>
+                            <li>Carried out front-end and back-end integration to validate data transmission and state consistency</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">April 1, 2026</div>
+                        <h3 class="timeline-title">Implementation of Core Functional Modules</h3>
+                        <ul class="timeline-details">
+                            <li>Finished system infrastructure setup and environment configuration</li>
+                            <li>Implemented core functions including thread management, content editing, and real-time collaboration</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 31, 2026</div>
+                        <h3 class="timeline-title">System Architecture and Technical Scheme Design</h3>
+                        <ul class="timeline-details">
+                            <li>Completed overall architecture design and modular decomposition of X-Thread</li>
+                            <li>Formulated interaction workflows, data models, and interface specifications</li>
+                            <li>Produced technical design documents to ensure development consistency</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 30, 2026</div>
+                        <h3 class="timeline-title">Requirement Analysis and Research Framework Establishment</h3>
+                        <ul class="timeline-details">
+                            <li>Conducted requirement elicitation and analysis for X-Thread system following Human-Centric Computing paradigm</li>
+                            <li>Defined design methodology, technical roadmap, and evaluation metrics</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 29, 2026</div>
+                        <h3 class="timeline-title">First Draft Design</h3>
+                        <p class="timeline-simple">Designed first draft of the poster and completed the overall framework</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 18, 2026</div>
+                        <h3 class="timeline-title">Project Homepage Deployment</h3>
+                        <p class="timeline-simple">Completed the project homepage with team member information and deployed to GitHub Pages</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 17, 2026</div>
+                        <h3 class="timeline-title">Task Division and Theme Confirmation</h3>
+                        <p class="timeline-simple">Divided tasks among 4 team members and confirmed the project theme</p>
+                    </div>
+                </div>
+                
+                <!-- 项目开始 - 最早 -->
+                <div class="timeline-item timeline-item-first">
+                    <div class="timeline-dot timeline-dot-start"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 15, 2026</div>
+                        <h3 class="timeline-title">Project Kickoff</h3>
+                        <p class="timeline-simple">Created GitHub repository and initialized the project structure</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -697,5 +2490,61 @@
     <footer>
         &copy; 2026 XJTLU CPT208 Group B1_6. All Rights Reserved.
     </footer>
+
+    <script>
+        // 获取所有导航项和section
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('section[id]');
+        
+        // 点击导航项滚动到对应section
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetId = item.getAttribute('data-target');
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // 滚动检测当前所在section
+        function updateActiveNav() {
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            // 如果没有匹配到section，检查header区域
+            if (!currentSection && window.scrollY < sections[0].offsetTop - 200) {
+                currentSection = 'home';
+            }
+            
+            // 更新导航项的active状态
+            navItems.forEach(item => {
+                const targetId = item.getAttribute('data-target');
+                const dot = item.querySelector('.nav-dot');
+                
+                if (targetId === currentSection) {
+                    item.classList.add('active');
+                    dot.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // 监听滚动事件
+        window.addEventListener('scroll', updateActiveNav);
+        
+        // 初始调用一次
+        updateActiveNav();
+    </script>
 </body>
 </html>
