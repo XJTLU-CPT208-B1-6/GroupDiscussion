@@ -86,14 +86,37 @@
         header {
             padding: 0 20px;
         }
+        
+        /* 闪光效果动画 */
+        @keyframes shine {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+        
         h1 {
-            font-size: 2.8rem;
+            font-size: 4.5rem;
             font-weight: 700;
             margin-bottom: 12px;
-            color: #222;
             letter-spacing: -0.8px;
             position: relative;
             display: inline-block;
+            
+            /* 闪光效果 */
+            background-image: linear-gradient(120deg, 
+                #5a2c7a 0%, 
+                #8c2db9 25%, 
+                #e8b4f8 40%, 
+                #8c2db9 60%, 
+                #5a2c7a 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s infinite linear;
         }
         h1::after {
             content: "";
@@ -102,7 +125,7 @@
             left: 0;
             width: 60px;
             height: 3px;
-            background-color: #8c2db9;
+            background: linear-gradient(90deg, #8c2db9, #a84ed1);
             border-radius: 3px;
         }
         .subtitle {
@@ -1404,8 +1427,195 @@
             margin: 0;
         }
 
+        /* Circular Gallery Styles */
+        .circular-gallery-container {
+            position: relative;
+            height: 700px;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        
+        .circular-gallery {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            perspective: 1500px;
+        }
+        
+        .gallery-item {
+            position: absolute;
+            width: 640px;
+            height: 480px;
+            top: 50%;
+            left: 50%;
+            transform-origin: center center;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s;
+            cursor: pointer;
+            z-index: 1;
+            perspective: 1000px;
+        }
+        
+        .gallery-item:hover {
+            z-index: 20;
+        }
+        
+        .gallery-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+        }
+        
+        .gallery-item.flipped .gallery-card {
+            transform: rotateY(180deg);
+        }
+        
+        .gallery-card-front,
+        .gallery-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        
+        .gallery-card-front {
+            background: white;
+            border-top: 5px solid #8c2db9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+        
+        .gallery-card-back {
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-back-image {
+            width: 90%;
+            height: 80%;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-item:hover .gallery-card-front {
+            box-shadow: 0 16px 50px rgba(140, 45, 185, 0.3);
+        }
+        
+        .gallery-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .gallery-card h3 {
+            color: #333;
+            margin: 0 0 0.8rem 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .gallery-card p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 30;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-nav:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 25px rgba(140, 45, 185, 0.4);
+        }
+        
+        .gallery-nav.prev {
+            left: 0;
+        }
+        
+        .gallery-nav.next {
+            right: 0;
+        }
+        
+        .gallery-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 30;
+        }
+        
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(140, 45, 185, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .gallery-dot.active {
+            background: linear-gradient(135deg, #8c2db9, #a84ed1);
+            transform: scale(1.3);
+        }
+        
+        .gallery-dot:hover {
+            background: rgba(140, 45, 185, 0.6);
+        }
+        
         /* Responsive Adjustments */
         @media (max-width: 768px) {
+            .circular-gallery-container {
+                height: 600px;
+            }
+            
+            .gallery-item {
+                width: 180px;
+                height: 240px;
+            }
+            
+            .gallery-icon {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .gallery-card p {
+                font-size: 0.9rem;
+            }
+            
             nav {
                 gap: 6px;
                 padding: 12px 16px;
@@ -1483,6 +1693,27 @@
             }
         }
         @media (max-width: 480px) {
+            .circular-gallery-container {
+                height: 550px;
+            }
+            
+            .gallery-item {
+                width: 140px;
+                height: 190px;
+            }
+            
+            .gallery-icon {
+                font-size: 2rem;
+            }
+            
+            .gallery-card h3 {
+                font-size: 1rem;
+            }
+            
+            .gallery-card p {
+                font-size: 0.85rem;
+            }
+            
             nav {
                 gap: 5px;
                 padding: 10px 12px;
@@ -1773,41 +2004,117 @@
     <!-- 核心功能速览 -->
     <section id="features">
         <h2>Core Features</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📹</div>
-                <h3>Video Conference</h3>
-                <p>Stable multi-functional video meetings with screen sharing capabilities</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3>AI Real-time Q&A</h3>
-                <p>Instant academic support to keep discussions flowing smoothly</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🐾</div>
-                <h3>AI Pet (Icebreaker)</h3>
-                <p>Manual-triggered AI pet for structured icebreaking (manually @pet name)</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🧠</div>
-                <h3>Collaborative Mind Map</h3>
-                <p>Real-time collaborative mind mapping for visualizing discussions</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📋</div>
-                <h3>Shared Whiteboard</h3>
-                <p>Flexible and quick idea recording board for brainstorming</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📁</div>
-                <h3>File Sharing</h3>
-                <p>Seamless file sharing with collaborative annotation capabilities</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <h3>Team Formation Hall</h3>
-                <p>Structured icebreaking and team matching platform</p>
+        <div class="circular-gallery-container">
+            <div class="circular-gallery">
+                <div class="gallery-item" data-index="0">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">📹</div>
+                            <h3>Voice Conference</h3>
+                            <p>Stable multi-functional video meetings with screen sharing</p>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="VoiceChat.png" alt="Voice Conference" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="1">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🤖</div>
+                            <h3>AI Real-time Q&A</h3>
+                            <p>Instant academic support to keep discussions flowing</p>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="AIRealtimeChat.png" alt="AI Real-time Q&A" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="2">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🐾</div>
+                            <h3>AI Pet Icebreaking</h3>
+                            <p>Manual-triggered AI pet for structured icebreaking</p>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="AIPetIcebreaking.png" alt="AI Pet Icebreaking" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="3">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🧠</div>
+                            <h3>Collaborative Mind Map</h3>
+                            <p>Real-time collaborative mind mapping for discussions</p>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="CollaborativeMindMap.png" alt="Collaborative Mind Map" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="4">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">📋</div>
+                            <h3>Shared Whiteboard</h3>
+                            <p>Flexible and quick idea recording board for brainstorming</p>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="Whiteboard.png" alt="Shared Whiteboard" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="5">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">📁</div>
+                            <h3>File Sharing</h3>
+                            <p>Seamless file sharing with collaborative annotation</p>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="FileSharing.png" alt="File Sharing" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="6">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">👥</div>
+                            <h3>Group Lobby</h3>
+                            <p>Structured icebreaking and team matching platform</p>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="GroupLobby.png" alt="Group Lobby" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="gallery-nav prev" aria-label="Previous">‹</button>
+                <button class="gallery-nav next" aria-label="Next">›</button>
+                
+                <div class="gallery-dots"></div>
             </div>
         </div>
     </section>
@@ -2545,6 +2852,176 @@
         
         // 初始调用一次
         updateActiveNav();
+        
+        // Circular Gallery Logic
+        class CircularGallery {
+            constructor() {
+                this.container = document.querySelector('.circular-gallery');
+                this.items = document.querySelectorAll('.gallery-item');
+                this.prevBtn = document.querySelector('.gallery-nav.prev');
+                this.nextBtn = document.querySelector('.gallery-nav.next');
+                this.dotsContainer = document.querySelector('.gallery-dots');
+                this.currentIndex = 0;
+                this.totalItems = this.items.length;
+                this.radiusX = 400; // 长轴半径
+                this.radiusY = 100; // 短轴半径
+                this.angleStep = (2 * Math.PI) / this.totalItems;
+                
+                this.init();
+            }
+            
+            init() {
+                this.createDots();
+                this.updatePositions();
+                this.attachEvents();
+            }
+            
+            createDots() {
+                for (let i = 0; i < this.totalItems; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+                    dot.addEventListener('click', () => this.goTo(i));
+                    this.dotsContainer.appendChild(dot);
+                }
+            }
+            
+            updatePositions() {
+                this.items.forEach((item, index) => {
+                    const relativeIndex = (index - this.currentIndex + this.totalItems) % this.totalItems;
+                    const angle = this.angleStep * relativeIndex - Math.PI / 2;
+                    
+                    // 椭圆形布局
+                    const x = Math.cos(angle) * this.radiusX;
+                    const y = Math.sin(angle) * this.radiusY;
+                    const scale = 0.7 + 0.3 * Math.cos(angle + Math.PI / 2);
+                    const z = Math.sin(angle) * 80;
+                    const opacity = 0.5 + 0.5 * Math.cos(angle + Math.PI / 2);
+                    
+                    item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) translateZ(${z}px) scale(${scale})`;
+                    item.style.opacity = opacity;
+                    item.style.zIndex = Math.round(scale * 10);
+                });
+                
+                this.updateDots();
+            }
+            
+            updateDots() {
+                const dots = this.dotsContainer.querySelectorAll('.gallery-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+            
+            goTo(index) {
+                this.currentIndex = index;
+                this.updatePositions();
+            }
+            
+            next() {
+                this.currentIndex = (this.currentIndex + 1) % this.totalItems;
+                this.updatePositions();
+            }
+            
+            prev() {
+                this.currentIndex = (this.currentIndex - 1 + this.totalItems) % this.totalItems;
+                this.updatePositions();
+            }
+            
+            toggleFlip(item) {
+                item.classList.toggle('flipped');
+            }
+            
+            attachEvents() {
+                this.nextBtn.addEventListener('click', () => this.next());
+                this.prevBtn.addEventListener('click', () => this.prev());
+                
+                // 点击卡片翻转
+                this.items.forEach((item) => {
+                    item.addEventListener('click', (e) => {
+                        // 只在点击卡片本身时翻转，避免误触
+                        if (!e.target.closest('.gallery-nav') && !e.target.closest('.gallery-dots')) {
+                            this.toggleFlip(item);
+                        }
+                    });
+                });
+                
+                this.container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    if (e.deltaY > 0) {
+                        this.next();
+                    } else {
+                        this.prev();
+                    }
+                }, { passive: false });
+                
+                let touchStartX = 0;
+                let touchStartY = 0;
+                let touchStartTime = 0;
+                
+                this.container.addEventListener('touchstart', (e) => {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    touchStartTime = Date.now();
+                });
+                
+                this.container.addEventListener('touchend', (e) => {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const touchEndY = e.changedTouches[0].clientY;
+                    const diffX = touchStartX - touchEndX;
+                    const diffY = touchStartY - touchEndY;
+                    const touchDuration = Date.now() - touchStartTime;
+                    
+                    // 判断是滑动还是点击
+                    if (touchDuration < 300 && Math.abs(diffX) < 30 && Math.abs(diffY) < 30) {
+                        // 点击事件，检查是否点击了卡片
+                        const touch = e.changedTouches[0];
+                        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                        const item = element?.closest('.gallery-item');
+                        if (item && !element.closest('.gallery-nav') && !element.closest('.gallery-dots')) {
+                            this.toggleFlip(item);
+                        }
+                    } else if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                        // 水平滑动
+                        if (diffX > 0) {
+                            this.next();
+                        } else {
+                            this.prev();
+                        }
+                    }
+                });
+                
+                window.addEventListener('resize', () => {
+                    this.updateRadius();
+                    this.updatePositions();
+                });
+                
+                this.updateRadius();
+            }
+            
+            updateRadius() {
+                const width = this.container.offsetWidth;
+                if (width < 500) {
+                    this.radiusX = 220;
+                    this.radiusY = 55;
+                } else if (width < 768) {
+                    this.radiusX = 300;
+                    this.radiusY = 75;
+                } else if (width < 1000) {
+                    this.radiusX = 350;
+                    this.radiusY = 87;
+                } else {
+                    this.radiusX = 400;
+                    this.radiusY = 100;
+                }
+            }
+        }
+        
+        // Initialize gallery when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => new CircularGallery());
+        } else {
+            new CircularGallery();
+        }
     </script>
 </body>
 </html>
