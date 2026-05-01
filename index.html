@@ -1221,7 +1221,7 @@
 
         .limitations-grid, .future-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: 1fr;
             gap: var(--space-xl);
             margin-top: var(--space-md);
         }
@@ -3670,26 +3670,69 @@
         <h3 style="margin-top: 2rem;">Current Limitations</h3>
         <div class="limitations-grid">
             <div class="limitation-item">
-                <span class="lim-icon">🌍</span>
-                <p>Only supports Chinese and English; international users limited</p>
+                <span class="lim-icon">🔑</span>
+                <div>
+                    <p style="font-weight: bold; margin-bottom: var(--space-sm);">Campus Single Sign-On (SSO) Integration</p>
+                    <p style="opacity: 0.8; line-height: 1.7;">We were unable to implement XJTLU email-based account registration, meaning users currently rely on generic login methods rather than the university's official authentication system.</p>
+                </div>
+            </div>
+            <div class="limitation-item">
+                <span class="lim-icon">🤖</span>
+                <div>
+                    <p style="font-weight: bold; margin-bottom: var(--space-sm);">Custom AI Integration & Specialized Agent</p>
+                    <p style="opacity: 0.8; line-height: 1.7;">Our planned integration with XJTLU's exclusive campus AI was not completed. In the future, connecting to this service would eliminate the need for users to configure external API keys. We also aim to explore training a specialized AI agent tailored to support student group discussions.</p>
+                </div>
+            </div>
+            <div class="limitation-item">
+                <span class="lim-icon">🔒</span>
+                <div>
+                    <p style="font-weight: bold; margin-bottom: var(--space-sm);">Security Testing</p>
+                    <p style="opacity: 0.8; line-height: 1.7;">Comprehensive security audits and penetration testing have not been performed on the platform. As a result, there is a potential risk of user information leakage, which will require further testing and hardening in future iterations.</p>
+                </div>
             </div>
             <div class="limitation-item">
                 <span class="lim-icon">📊</span>
-                <p>No post-meeting member participation statistics and automatic contribution calculation</p>
+                <div>
+                    <p style="font-weight: bold; margin-bottom: var(--space-sm);">Post-Meeting Contribution Analytics</p>
+                    <p style="opacity: 0.8; line-height: 1.7;">The platform currently lacks post-meeting statistics on member participation and automatic contribution calculation. This feature would help students track engagement, distribute work fairly, and provide transparent records for peer evaluation.</p>
+                </div>
             </div>
         </div>
 
         <h3 style="margin-top: 2rem;">Future Optimization Directions</h3>
         <div class="future-grid">
             <div class="future-item">
-                <span class="future-icon">➕</span>
-                <p>Add multi-language versions, improve versatility and accessibility</p>
+                <span class="future-icon">🔑</span>
+                <div>
+                    <p style="font-weight: bold; margin-bottom: var(--space-sm);">Campus Account Integration</p>
+                    <p style="opacity: 0.8; line-height: 1.7;">We will actively communicate with the university's IT department to explore the implementation of XJTLU Single Sign-On (SSO), enabling one-click login with student emails to streamline registration and ensure exclusive access for campus users. We will also refine role-based permission management, allowing instructors to view group discussion records and project progress as needed.</p>
+                </div>
             </div>
             <div class="future-item">
-                <span class="future-icon">📈</span>
-                <p>Add post-meeting summary function, analyze member participation, help team collaboration improvement</p>
+                <span class="future-icon">🤖</span>
+                <div>
+                    <p style="font-weight: bold; margin-bottom: var(--space-sm);">Advanced AI Integration</p>
+                    <p style="opacity: 0.8; line-height: 1.7;">We will continue to coordinate with relevant university teams to integrate XJTLU's exclusive campus AI service, eliminating the need for manual API configuration and lowering the barrier to use. Building on this, we plan to train and deploy a specialized AI agent tailored for student group discussions, providing ice-breaking guidance, real-time academic support, opinion organization, and automated meeting summarization.</p>
+                </div>
+            </div>
+            <div class="future-item">
+                <span class="future-icon">🔒</span>
+                <div>
+                    <p style="font-weight: bold; margin-bottom: var(--space-sm);">Platform Security Enhancement</p>
+                    <p style="opacity: 0.8; line-height: 1.7;">Conduct comprehensive security audits and penetration testing to address potential vulnerabilities and prevent user information leakage. We will implement HTTPS encryption, data anonymization, and access control mechanisms to strengthen overall platform security.</p>
+                </div>
+            </div>
+            <div class="future-item">
+                <span class="future-icon">📊</span>
+                <div>
+                    <p style="font-weight: bold; margin-bottom: var(--space-sm);">Post-Meeting Contribution Analytics</p>
+                    <p style="opacity: 0.8; line-height: 1.7;">Develop a post-meeting participation statistics module to automatically record metrics such as speaking duration, message count, and file contributions. We will also implement an automatic contribution calculation feature that generates visual reports, providing objective data for peer evaluation and instructor assessment.</p>
+                </div>
             </div>
         </div>
+        <p style="margin-top: var(--space-xl); opacity: 0.8; line-height: 1.8;">
+            Beyond these specific improvements, we will continue to iterate on the website based on user feedback and university requirements, ensuring the platform meets the needs of student collaboration at XJTLU.
+        </p>
 
         <h3 style="margin-top: 2rem;">Social & Ethical Considerations</h3>
         <p>Throughout this project, we remained committed to ethical principles. We ensured user privacy by implementing robust data protection measures, obtained informed consent for all user research, and designed our AI features to augment rather than replace human interaction.</p>
