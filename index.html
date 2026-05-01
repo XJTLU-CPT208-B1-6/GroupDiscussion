@@ -707,8 +707,8 @@
             border: 2px solid var(--color-fg);
             border-left: 4px solid var(--color-accent-primary);
             display: flex;
-            align-items: start;
-            gap: var(--space-md);
+            flex-direction: column;
+            gap: var(--space-sm);
             transition: transform var(--duration-normal) var(--easing-bounce),
                         box-shadow var(--duration-normal) var(--easing-bounce);
         }
@@ -718,15 +718,19 @@
             box-shadow: 12px 12px 0px var(--color-fg);
         }
 
-        .aim-emoji {
-            font-size: 2rem;
-            flex-shrink: 0;
+        .aim-item h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--color-accent-primary);
+            font-family: var(--font-heading);
         }
 
         .aim-item p {
             margin: 0;
-            opacity: 0.7;
-            line-height: 1.6;
+            opacity: 0.8;
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
         .findings-container {
@@ -783,19 +787,179 @@
         .req-item {
             background: white;
             border-radius: var(--radius-md);
-            padding: var(--space-md) var(--space-xl);
-            box-shadow: var(--shadow-hard-sm);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-hard-md);
             border: 2px solid var(--color-fg);
             border-left: 4px solid var(--color-accent-quaternary);
             color: var(--color-fg);
-            font-weight: var(--font-weight-medium);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
             transition: transform var(--duration-normal) var(--easing-bounce),
                         box-shadow var(--duration-normal) var(--easing-bounce);
         }
 
         .req-item:hover {
-            transform: translateX(4px);
-            box-shadow: 6px 6px 0px var(--color-fg);
+            transform: rotate(-1deg) scale(1.02);
+            box-shadow: 12px 12px 0px var(--color-fg);
+        }
+
+        .req-item h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: var(--font-weight-bold);
+            color: var(--color-accent-quaternary);
+            font-family: var(--font-heading);
+        }
+
+        .req-item p {
+            margin: 0;
+            opacity: 0.8;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .chroma-grid {
+            position: relative;
+            width: 100%;
+            height: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 1.5rem auto 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .chroma-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--color-fg);
+            background: white;
+            cursor: default;
+            transition: border-color 0.3s ease;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+            --spotlight-color: rgba(139, 92, 246, 0.2);
+        }
+
+        .chroma-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
+
+        .chroma-card:hover::before {
+            opacity: 1;
+        }
+
+        .chroma-img-wrapper {
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0;
+            padding: 1.5rem;
+            background: linear-gradient(145deg, var(--color-accent-primary), var(--color-accent-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chroma-avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--color-accent-primary);
+            font-family: var(--font-heading);
+            font-weight: var(--font-weight-extrabold);
+            border: 4px solid var(--color-fg);
+            box-shadow: 4px 4px 0px var(--color-fg);
+        }
+
+        .chroma-info {
+            position: relative;
+            z-index: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .chroma-name {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-extrabold);
+            font-family: var(--font-heading);
+            color: var(--color-fg);
+        }
+
+        .chroma-role {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--color-accent-primary);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .chroma-tag {
+            display: inline-flex;
+            align-self: flex-start;
+            padding: 0.35rem 0.9rem;
+            background: var(--color-accent-tertiary);
+            color: var(--color-fg);
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: var(--font-weight-bold);
+            border: 2px solid var(--color-fg);
+            margin-top: 0.25rem;
+        }
+
+        .chroma-bio {
+            margin: 0.75rem 0 0 0;
+            opacity: 0.8;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .chroma-pain-points {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--color-bg);
+            border-radius: 12px;
+            border: 2px dashed var(--color-accent-primary);
+        }
+
+        .chroma-pain-points h5 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            font-weight: var(--font-weight-bold);
+            font-family: var(--font-heading);
+            color: var(--color-accent-primary);
+        }
+
+        .chroma-pain-points ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .chroma-pain-points li {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         .evaluation-methods {
@@ -1996,8 +2160,8 @@
 
         .gallery-item {
             position: absolute;
-            width: 640px;
-            height: 480px;
+            width: 625px;
+            height: 470px;
             top: 50%;
             left: 50%;
             transform-origin: center center;
@@ -2055,17 +2219,34 @@
         }
 
         .gallery-back-image {
-            width: 90%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             border-radius: var(--radius-md);
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .gallery-back-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: var(--radius-md);
         }
 
         .gallery-item:hover .gallery-card-front {
             box-shadow: 12px 12px 0px var(--color-fg);
+        }
+
+        .gallery-click-hint {
+            margin-top: var(--space-md);
+            font-size: 0.875rem;
+            opacity: 0.7;
+            font-weight: 500;
+            color: var(--color-accent-primary);
         }
 
         .gallery-icon {
@@ -2341,8 +2522,8 @@
                 height: 600px;
             }
             .gallery-item {
-                width: 180px;
-                height: 240px;
+                width: 350px;
+                height: 263px;
             }
             .gallery-icon {
                 font-size: 2.5rem;
@@ -2571,20 +2752,20 @@
         <h3>Project Aims</h3>
         <div class="aims-grid">
             <div class="aim-item">
-                <span class="aim-emoji">🌐</span>
-                <p>Break time-space barriers: support hybrid discussions anytime, anywhere</p>
+                <h4>Break Geographical & Temporal Barriers</h4>
+                <p>Empower XJTLU students with a flexible, hybrid collaboration platform that eliminates scheduling and location barriers, enabling them to join group discussions anytime, anywhere.</p>
             </div>
             <div class="aim-item">
-                <span class="aim-emoji">🤖</span>
-                <p>Real-time AI academic support: instant Q&A to keep discussions efficient</p>
+                <h4>Deliver Real-Time AI-Powered Support</h4>
+                <p>Provide instant, context-aware academic support through integrated GenAI, helping students resolve questions and clarify concepts in real time to keep discussions productive.</p>
             </div>
             <div class="aim-item">
-                <span class="aim-emoji">💾</span>
-                <p>Save and organize ideas: collaborative whiteboard/mind mapping to retain key content</p>
+                <h4>Preserve & Organize Key Insights</h4>
+                <p>Enhance idea retention and post-meeting accountability with collaborative mind mapping and shared whiteboarding tools, ensuring key insights are captured, organized, and easily revisited.</p>
             </div>
             <div class="aim-item">
-                <span class="aim-emoji">✨</span>
-                <p>Increase participation: structured icebreaking process to reduce social awkwardness</p>
+                <h4>Streamline & Boost Participation</h4>
+                <p>Eliminate awkward silences and low engagement in randomly-assigned teams with guided onboarding and structured workflows, reducing social friction and helping groups dive into productive discussions faster.</p>
             </div>
         </div>
     </section>
@@ -2734,11 +2915,12 @@
                         <div class="gallery-card-front">
                             <div class="gallery-icon">📹</div>
                             <h3>Voice Conference</h3>
-                            <p>Stable multi-functional video meetings with screen sharing</p>
+                            <p>Stable realtime voice meetings</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
                         </div>
                         <div class="gallery-card-back">
                             <div class="gallery-back-image">
-                                <img src="VoiceChat.png" alt="Voice Conference interface showing video meeting with screen sharing" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" loading="lazy">
+                                <img src="VoiceChat.png" alt="Voice Conference interface showing video meeting with screen sharing" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -2750,10 +2932,11 @@
                             <div class="gallery-icon">🤖</div>
                             <h3>AI Real-time Q&A</h3>
                             <p>Instant academic support to keep discussions flowing</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
                         </div>
                         <div class="gallery-card-back">
                             <div class="gallery-back-image">
-                                <img src="AIRealtimeChat.png" alt="AI Real-time Q&A interface showing instant academic support" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" loading="lazy">
+                                <img src="AIRealtimeChat.png" alt="AI Real-time Q&A interface showing instant academic support" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -2765,10 +2948,11 @@
                             <div class="gallery-icon">🐾</div>
                             <h3>AI Pet Icebreaking</h3>
                             <p>Manual-triggered AI pet for structured icebreaking</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
                         </div>
                         <div class="gallery-card-back">
                             <div class="gallery-back-image">
-                                <img src="AIPetIcebreaking.png" alt="AI Pet Icebreaking interface showing structured icebreaking interaction" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" loading="lazy">
+                                <img src="AIPetIcebreaking.png" alt="AI Pet Icebreaking interface showing structured icebreaking interaction" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -2780,10 +2964,11 @@
                             <div class="gallery-icon">🧠</div>
                             <h3>Collaborative Mind Map</h3>
                             <p>Real-time collaborative mind mapping for discussions</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
                         </div>
                         <div class="gallery-card-back">
                             <div class="gallery-back-image">
-                                <img src="CollaborativeMindMap.png" alt="Collaborative Mind Map interface showing real-time mind mapping" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" loading="lazy">
+                                <img src="CollaborativeMindMap.png" alt="Collaborative Mind Map interface showing real-time mind mapping" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -2795,10 +2980,11 @@
                             <div class="gallery-icon">📋</div>
                             <h3>Shared Whiteboard</h3>
                             <p>Flexible and quick idea recording board for brainstorming</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
                         </div>
                         <div class="gallery-card-back">
                             <div class="gallery-back-image">
-                                <img src="Whiteboard.png" alt="Shared Whiteboard interface showing collaborative brainstorming board" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" loading="lazy">
+                                <img src="Whiteboard.png" alt="Shared Whiteboard interface showing collaborative brainstorming board" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -2810,10 +2996,11 @@
                             <div class="gallery-icon">📁</div>
                             <h3>File Sharing</h3>
                             <p>Seamless file sharing with collaborative annotation</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
                         </div>
                         <div class="gallery-card-back">
                             <div class="gallery-back-image">
-                                <img src="FileSharing.png" alt="File Sharing interface showing collaborative file annotation" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" loading="lazy">
+                                <img src="FileSharing.png" alt="File Sharing interface showing collaborative file annotation" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -2825,10 +3012,11 @@
                             <div class="gallery-icon">👥</div>
                             <h3>Group Lobby</h3>
                             <p>Structured icebreaking and team matching platform</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
                         </div>
                         <div class="gallery-card-back">
                             <div class="gallery-back-image">
-                                <img src="GroupLobby.png" alt="Group Lobby interface showing team matching and icebreaking" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" loading="lazy">
+                                <img src="GroupLobby.png" alt="Group Lobby interface showing team matching and icebreaking" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -2846,41 +3034,145 @@
         <h2>Requirements Discovery</h2>
         
         <h3>User Interview Key Findings</h3>
+        
+        <h4 style="margin-top: 1.5rem; font-family: var(--font-heading); color: var(--color-accent-primary);">1. Current Group Collaboration Workflow</h4>
         <div class="findings-container">
             <div class="finding-item">
                 <span class="finding-num">1</span>
-                <p>Course time conflicts severe; offline classrooms tight</p>
+                <p><strong>Scheduling:</strong> Coordinate meeting times via group chat, then book offline study rooms for discussions.</p>
             </div>
             <div class="finding-item">
                 <span class="finding-num">2</span>
-                <p>Unfamiliar team members → awkward atmosphere → hard to start topics → low efficiency</p>
+                <p><strong>Hybrid fallback:</strong> If in-person meetings are impossible, they use WeChat voice messages and manual notes.</p>
             </div>
             <div class="finding-item">
                 <span class="finding-num">3</span>
-                <p>Group chat messages messy; key ideas easily lost</p>
+                <p><strong>Pre-work & problem-solving:</strong> Members study materials individually first; if stuck, they wait to ask teachers or seniors after class.</p>
+            </div>
+        </div>
+
+        <h4 style="margin-top: 1.5rem; font-family: var(--font-heading); color: var(--color-accent-primary);">2. Key Pain Points & Inefficiencies</h4>
+        <div class="findings-container">
+            <div class="finding-item">
+                <span class="finding-num">1</span>
+                <p><strong>Coordination barriers:</strong> Severe schedule conflicts and fully booked classrooms often force late-night meetings.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">2</span>
+                <p><strong>Awkward group dynamics:</strong> Unfamiliar teammates create awkward silences and low-efficiency discussions.</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">3</span>
+                <p><strong>Disorganized communication:</strong> Chaotic chat logs and scattered notes make key points hard to find or review.</p>
             </div>
             <div class="finding-item">
                 <span class="finding-num">4</span>
-                <p>No instant academic support when encountering problems; can only ask teachers/TAs after class</p>
+                <p><strong>Lack of real-time support:</strong> No immediate academic help leads to repeated roadblocks and wasted time.</p>
             </div>
             <div class="finding-item">
                 <span class="finding-num">5</span>
-                <p>Manual notes scattered; can't find discussion logic during review</p>
+                <p><strong>Poor traceability:</strong> Manually compiled notes lack clear discussion logic, making follow-up work difficult.</p>
+            </div>
+        </div>
+
+        <h4 style="margin-top: 1.5rem; font-family: var(--font-heading); color: var(--color-accent-primary);">3. Implication for X‑Thread</h4>
+        <div class="findings-container">
+            <div class="finding-item">
+                <span class="finding-num">1</span>
+                <p>A structured platform to reduce scheduling and coordination friction</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">2</span>
+                <p>Tools to lower awkwardness and improve discussion flow</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">3</span>
+                <p>Built-in real-time academic support</p>
+            </div>
+            <div class="finding-item">
+                <span class="finding-num">4</span>
+                <p>Structured, auto-synced note-taking for clear progress tracking</p>
+            </div>
+        </div>
+
+        <h3>Target Users</h3>
+        <div class="chroma-grid" id="targetUsersGrid">
+            <div class="chroma-card" data-border-color="#8B5CF6">
+                <div class="chroma-img-wrapper">
+                    <div class="chroma-avatar">CR</div>
+                </div>
+                <div class="chroma-info">
+                    <h4 class="chroma-name">Cristina</h4>
+                    <p class="chroma-role">20, Senior 3, Financial Mathematics, XJTLU</p>
+                    <span class="chroma-tag">Efficiency-Focused</span>
+                    <p class="chroma-bio">
+                        A busy student balancing 3–4 weekly group projects, portfolio work, and study-abroad applications. 
+                        She is familiar with hybrid learning but frustrated by unstructured, inefficient collaboration.
+                    </p>
+                    <div class="chroma-pain-points">
+                        <h5>Key Frustrations</h5>
+                        <ul>
+                            <li>Dislikes awkward icebreakers and small talk</li>
+                            <li>Struggles with off-topic discussions and dead air</li>
+                            <li>Feels lost without a clear meeting structure</li>
+                            <li>Frustrated by messy chat logs and scattered notes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chroma-card" data-border-color="#34D399">
+                <div class="chroma-img-wrapper" style="background: linear-gradient(210deg, #34D399, #8B5CF6);">
+                    <div class="chroma-avatar" style="color: #34D399;">XU</div>
+                </div>
+                <div class="chroma-info">
+                    <h4 class="chroma-name">Xu</h4>
+                    <p class="chroma-role">20, Senior 3, Applied Mathematics, XJTLU</p>
+                    <span class="chroma-tag">Connection-Focused</span>
+                    <p class="chroma-bio">
+                        A social, outgoing student who thrives in collaborative settings. He loves connecting with new teammates 
+                        and often acts as the "glue" of the group, keeping conversations inclusive and lively.
+                    </p>
+                    <div class="chroma-pain-points">
+                        <h5>Key Frustrations</h5>
+                        <ul>
+                            <li>Dislikes overly rigid meetings that kill natural conversation</li>
+                            <li>Hates awkward silences and one-sided discussions</li>
+                            <li>Frustrated when quiet members hold back ideas</li>
+                            <li>Disorganized chat logs lose collaborative energy</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
         <h3>Core User Requirements (6 Must-Haves)</h3>
         <div class="requirements-list">
-            <div class="req-item">✅ Structured icebreaking and team matching</div>
-            <div class="req-item">✅ Real-time AI Q&A during meetings</div>
-            <div class="req-item">✅ Real-time collaborative mind mapping</div>
-            <div class="req-item">✅ Flexible and quick idea recording board</div>
-            <div class="req-item">✅ Seamless file sharing with collaborative annotation</div>
-            <div class="req-item">✅ Stable multi-functional video conference</div>
+            <div class="req-item">
+                <h4>1. Structured Onboarding & Icebreaking Support</h4>
+                <p>Offer dedicated team matching and guided icebreaker activities to help users quickly adapt to unfamiliar teammates and reduce awkwardness.</p>
+            </div>
+            <div class="req-item">
+                <h4>2. Live AI-Powered Problem Solving</h4>
+                <p>Provide real-time, in-meeting AI assistance to answer study-related questions and resolve confusion on the spot, preventing wasted time due to roadblocks.</p>
+            </div>
+            <div class="req-item">
+                <h4>3. Collaborative Mind Mapping & Idea Organization</h4>
+                <p>Support live co-editing of mind maps during discussions to capture key insights in real time, with automatic post-meeting summaries for easy review.</p>
+            </div>
+            <div class="req-item">
+                <h4>4. Quick & Flexible Idea Logging</h4>
+                <p>Include a shared note-taking board to capture spontaneous thoughts, ensuring no ideas are lost during the discussion.</p>
+            </div>
+            <div class="req-item">
+                <h4>5. Seamless Document Sharing & Analysis</h4>
+                <p>Enable in-meeting file sharing and collaborative annotation for efficient document review and discussion, supporting post-meeting summary work.</p>
+            </div>
+            <div class="req-item">
+                <h4>6. Full-Featured Video Call Environment</h4>
+                <p>Offer a stable, full-featured video call experience to support smooth communication for hybrid team collaboration.</p>
+            </div>
         </div>
-
-        <h3>Target Users</h3>
-        <p style="font-size: 1.05rem; opacity: 0.7;">All XJTLU students, language course/academic course instructors</p>
     </section>
 
     <section id="photos">
@@ -2911,38 +3203,204 @@
 
     <section id="sketches">
         <h2>Crazy Eights Sketching</h2>
-        <div class="sketches-grid">
-            <div class="sketch-item">
-                <div class="sketch-placeholder">1️⃣</div>
-                <p>Homepage Dashboard</p>
-            </div>
-            <div class="sketch-item">
-                <div class="sketch-placeholder">2️⃣</div>
-                <p>Discussion Thread View</p>
-            </div>
-            <div class="sketch-item">
-                <div class="sketch-placeholder">3️⃣</div>
-                <p>User Profile Page</p>
-            </div>
-            <div class="sketch-item">
-                <div class="sketch-placeholder">4️⃣</div>
-                <p>Notification Center</p>
-            </div>
-            <div class="sketch-item">
-                <div class="sketch-placeholder">5️⃣</div>
-                <p>Search & Discovery</p>
-            </div>
-            <div class="sketch-item">
-                <div class="sketch-placeholder">6️⃣</div>
-                <p>Badges & Achievements</p>
-            </div>
-            <div class="sketch-item">
-                <div class="sketch-placeholder">7️⃣</div>
-                <p>Analytics Dashboard</p>
-            </div>
-            <div class="sketch-item">
-                <div class="sketch-placeholder">8️⃣</div>
-                <p>Mobile Interface</p>
+        <div class="circular-gallery-container">
+            <div class="circular-gallery">
+                <div class="gallery-item" data-index="0">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🤖</div>
+                            <h3>AI Assistant</h3>
+                            <p>Real-time AI help for study questions</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="AI.png" alt="AI Assistant interface showing chat with AI" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="1">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">➕</div>
+                            <h3>Create Room</h3>
+                            <p>Create a new study room with custom settings</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="createroom.png" alt="Create Room interface showing room creation form" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="2">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">📁</div>
+                            <h3>File Sharing</h3>
+                            <p>Share and collaborate on files in real-time</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="file_sharing.png" alt="File Sharing interface showing file upload and management" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="3">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">👥</div>
+                            <h3>Group Lobby</h3>
+                            <p>Team matching and icebreaking activities</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="group_lobby.png" alt="Group Lobby interface showing team matching and icebreaking" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="4">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🏠</div>
+                            <h3>Home Dashboard</h3>
+                            <p>Overview of your study groups and activities</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="home_dashboard.png" alt="Home Dashboard interface showing overview of groups" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="5">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🔗</div>
+                            <h3>Join Room</h3>
+                            <p>Join existing study rooms and discussions</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="join_room.png" alt="Join Room interface showing available rooms to join" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="6">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🧠</div>
+                            <h3>Mind Mapping</h3>
+                            <p>Collaborative mind mapping for brainstorming</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="mindmap.png" alt="Mind Mapping interface showing collaborative mind mapping" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="7">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🐾</div>
+                            <h3>Pet Settings</h3>
+                            <p>Customize your AI icebreaking pet</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="pet_setting.png" alt="Pet Settings interface showing AI pet customization" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="8">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">👤</div>
+                            <h3>Profile Page</h3>
+                            <p>View and edit your personal profile</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="protfile.png" alt="Profile Page interface showing user profile information" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="9">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">📹</div>
+                            <h3>Voice Chat</h3>
+                            <p>Video calls with screen sharing capabilities</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="voice_chat.png" alt="Voice Chat interface showing video call with participants" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="10">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">📋</div>
+                            <h3>Whiteboard</h3>
+                            <p>Flexible whiteboard for collaborative drawing</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="whiteboard_origin.png" alt="Whiteboard interface showing collaborative drawing" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="11">
+                    <div class="gallery-card">
+                        <div class="gallery-card-front">
+                            <div class="gallery-icon">🏘️</div>
+                            <h3>Current Room</h3>
+                            <p>View and manage your current study room</p>
+                            <div class="gallery-click-hint">Click to view the figure</div>
+                        </div>
+                        <div class="gallery-card-back">
+                            <div class="gallery-back-image">
+                                <img src="current_room.png" alt="Current room interface showing study room management" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="gallery-nav prev" aria-label="Previous gallery item">‹</button>
+                <button class="gallery-nav next" aria-label="Next gallery item">›</button>
+                
+                <div class="gallery-dots"></div>
             </div>
         </div>
     </section>
@@ -2969,22 +3427,6 @@
                     <li>Gamification elements</li>
                 </ul>
             </div>
-        </div>
-        <div class="figma-links">
-            <a href="#" class="figma-btn">
-                <span>🎨</span>
-                <div>
-                    <strong>Low-Fidelity Prototype</strong>
-                    <small>View on Figma</small>
-                </div>
-            </a>
-            <a href="#" class="figma-btn">
-                <span>✨</span>
-                <div>
-                    <strong>High-Fidelity Prototype</strong>
-                    <small>View on Figma</small>
-                </div>
-            </a>
         </div>
     </section>
 
@@ -3151,6 +3593,9 @@
                         <p>Auto trigger (timed/silence popup) → High interaction but easy to interrupt</p>
                     </div>
                 </div>
+                <p style="margin: var(--space-md) 0; line-height: 1.8; opacity: 0.8;">
+                    Through the simulation meeting test, the performance of the two prototypes, A and B, in terms of meeting efficiency, navigation efficiency, ease of learning, error rate, etc. was compared: Prototype B has stronger interactivity, but it is prone to interrupting discussions and distracting users' attention; Prototype A, on the other hand, enables users to control the pace independently, avoiding interference with the focus of the meeting. Therefore, Prototype A was ultimately selected as the AI pet prototype.
+                </p>
                 <p class="result-badge">✅ Final choice: Prototype A</p>
             </div>
         </div>
@@ -3560,17 +4005,32 @@
         updateActiveNav();
 
         class CircularGallery {
-            constructor() {
-                this.container = document.querySelector('.circular-gallery');
-                this.items = document.querySelectorAll('.gallery-item');
-                this.prevBtn = document.querySelector('.gallery-nav.prev');
-                this.nextBtn = document.querySelector('.gallery-nav.next');
-                this.dotsContainer = document.querySelector('.gallery-dots');
+            constructor(container, options = {}) {
+                this.container = container;
+                this.items = container.querySelectorAll('.gallery-item');
+                this.prevBtn = container.querySelector('.gallery-nav.prev');
+                this.nextBtn = container.querySelector('.gallery-nav.next');
+                this.dotsContainer = container.querySelector('.gallery-dots');
                 this.currentIndex = 0;
                 this.totalItems = this.items.length;
-                this.radiusX = 400;
-                this.radiusY = 100;
+                
+                // 根据项目数量和可选配置设置参数
+                this.baseRadiusX = options.baseRadiusX || 400;
+                this.baseRadiusY = options.baseRadiusY || 100;
+                this.radiusX = this.baseRadiusX;
+                this.radiusY = this.baseRadiusY;
+                
+                // 根据项目数量调整角度步长和可见性参数
                 this.angleStep = (2 * Math.PI) / this.totalItems;
+                this.scaleMin = options.scaleMin || 0.7;
+                this.scaleMax = options.scaleMax || 1.0;
+                this.opacityMin = options.opacityMin || 0.3;
+                this.opacityMax = options.opacityMax || 1.0;
+                
+                // 设置当前索引为中间位置（如果需要）
+                if (options.centerStart) {
+                    this.currentIndex = Math.floor(this.totalItems / 2);
+                }
 
                 this.init();
             }
@@ -3592,18 +4052,23 @@
 
             updatePositions() {
                 this.items.forEach((item, index) => {
-                    const relativeIndex = (index - this.currentIndex + this.totalItems) % this.totalItems;
-                    const angle = this.angleStep * relativeIndex - Math.PI / 2;
-
-                    const x = Math.cos(angle) * this.radiusX;
-                    const y = Math.sin(angle) * this.radiusY;
-                    const scale = 0.7 + 0.3 * Math.cos(angle + Math.PI / 2);
-                    const z = Math.sin(angle) * 80;
-                    const opacity = 0.5 + 0.5 * Math.cos(angle + Math.PI / 2);
+                    let offset = index - this.currentIndex;
+                    if (offset > this.totalItems / 2) offset -= this.totalItems;
+                    if (offset < -this.totalItems / 2) offset += this.totalItems;
+                    
+                    const angle = this.angleStep * offset;
+                    
+                    const x = Math.sin(angle) * this.radiusX;
+                    const y = -Math.cos(angle) * this.radiusY;
+                    
+                    const scaleFactor = Math.cos(angle);
+                    const scale = this.scaleMin + (this.scaleMax - this.scaleMin) * (scaleFactor + 1) / 2;
+                    const z = Math.cos(angle) * 80;
+                    const opacity = this.opacityMin + (this.opacityMax - this.opacityMin) * (scaleFactor + 1) / 2;
 
                     item.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) translateZ(${z}px) scale(${scale})`;
                     item.style.opacity = opacity;
-                    item.style.zIndex = Math.round(scale * 10);
+                    item.style.zIndex = this.totalItems - Math.abs(offset);
                 });
 
                 this.updateDots();
@@ -3673,8 +4138,7 @@
                     const diffY = touchStartY - touchEndY;
                     const touchDuration = Date.now() - touchStartTime;
 
-                    if (touchDuration < 300 && Math.abs(diffX) < 30 && Math.abs(diffY) < 30) {
-                        const touch = e.changedTouches[0];
+                    if (touchDuration < 300 && Math.abs(diffX) < 30 && Math.abs(diffY) < 30) {                        const touch = e.changedTouches[0];
                         const element = document.elementFromPoint(touch.clientX, touch.clientY);
                         const item = element?.closest('.gallery-item');
                         if (item && !element.closest('.gallery-nav') && !element.closest('.gallery-dots')) {
@@ -3700,25 +4164,127 @@
             updateRadius() {
                 const width = this.container.offsetWidth;
                 if (width < 500) {
-                    this.radiusX = 220;
-                    this.radiusY = 55;
+                    this.radiusX = this.baseRadiusX * 0.55;
+                    this.radiusY = this.baseRadiusY * 0.55;
                 } else if (width < 768) {
-                    this.radiusX = 300;
-                    this.radiusY = 75;
+                    this.radiusX = this.baseRadiusX * 0.75;
+                    this.radiusY = this.baseRadiusY * 0.75;
                 } else if (width < 1000) {
-                    this.radiusX = 350;
-                    this.radiusY = 87;
+                    this.radiusX = this.baseRadiusX * 0.875;
+                    this.radiusY = this.baseRadiusY * 0.875;
                 } else {
-                    this.radiusX = 400;
-                    this.radiusY = 100;
+                    this.radiusX = this.baseRadiusX;
+                    this.radiusY = this.baseRadiusY;
                 }
             }
         }
 
+        function initGalleries() {
+            const galleries = document.querySelectorAll('.circular-gallery');
+            
+            galleries.forEach((container, index) => {
+                const items = container.querySelectorAll('.gallery-item');
+                const totalItems = items.length;
+                
+                let options = {};
+                
+                // 根据画廊位置和项目数量设置不同配置
+                if (totalItems === 12) {
+                    // Crazy Eights Sketching画廊 - 12个项目
+                    options = {
+                        baseRadiusX: 400,
+                        baseRadiusY: 100,
+                        scaleMin: 0.55,
+                        scaleMax: 1.0,
+                        opacityMin: 0.2,
+                        opacityMax: 1.0,
+                        centerStart: false // 不从中间开始，保持从0开始
+                    };
+                } else if (totalItems === 7) {
+                    // Features画廊 - 7个项目
+                    options = {
+                        baseRadiusX: 420,
+                        baseRadiusY: 105,
+                        scaleMin: 0.7,
+                        scaleMax: 1.0,
+                        opacityMin: 0.3,
+                        opacityMax: 1.0,
+                        centerStart: false
+                    };
+                } else {
+                    // 默认配置
+                    options = {
+                        baseRadiusX: 400,
+                        baseRadiusY: 100,
+                        scaleMin: 0.7,
+                        scaleMax: 1.0,
+                        opacityMin: 0.3,
+                        opacityMax: 1.0,
+                        centerStart: false
+                    };
+                }
+                
+                new CircularGallery(container, options);
+            });
+        }
+        
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => new CircularGallery());
+            document.addEventListener('DOMContentLoaded', initGalleries);
         } else {
-            new CircularGallery();
+            initGalleries();
+        }
+
+        // ChromaGrid Spotlight Effect
+        class ChromaGrid {
+            constructor(containerId) {
+                this.container = document.getElementById(containerId);
+                if (!this.container) return;
+
+                this.cards = this.container.querySelectorAll('.chroma-card');
+                this.init();
+            }
+
+            init() {
+                this.cards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => this.handleCardMove(e, card));
+                    const borderColor = card.dataset.borderColor;
+                    if (borderColor) {
+                        let spotlightColor = borderColor;
+                        if (borderColor.startsWith('#')) {
+                            const hex = borderColor.slice(1);
+                            const r = parseInt(hex.slice(0, 2), 16);
+                            const g = parseInt(hex.slice(2, 4), 16);
+                            const b = parseInt(hex.slice(4, 6), 16);
+                            spotlightColor = `rgba(${r}, ${g}, ${b}, 0.2)`;
+                        }
+                        card.style.setProperty('--spotlight-color', spotlightColor);
+                    }
+                    card.addEventListener('mouseenter', () => {
+                        if (borderColor) {
+                            card.style.borderColor = borderColor;
+                        }
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.borderColor = 'var(--color-fg)';
+                    });
+                });
+            }
+
+            handleCardMove(e, card) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                new ChromaGrid('targetUsersGrid');
+            });
+        } else {
+            new ChromaGrid('targetUsersGrid');
         }
     </script>
 </body>
